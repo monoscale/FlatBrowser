@@ -50,6 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\FileComparerTest.cs" />
+    <Compile Include="Models\FileExtensionTest.cs" />
+    <Compile Include="Models\FolderCategoryTest.cs" />
+    <Compile Include="Models\FolderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,6 +63,14 @@
       <Project>{D401A37E-4914-4886-84B6-519C2C560DD2}</Project>
       <Name>FlatBrowser</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Content Include="TestFolder\Folder1\Folder2\image2.bmp" />
+    <Content Include="TestFolder\Folder1\text3.txt" />
+    <Content Include="TestFolder\image1.bmp" />
+    <Content Include="TestFolder\text1.txt" />
+    <Content Include="TestFolder\text2.txt" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

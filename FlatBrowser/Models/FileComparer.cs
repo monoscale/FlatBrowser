@@ -26,8 +26,6 @@ namespace FlatBrowser.Models {
         /// </returns>
         public int Compare(File x, File y) {
             return StrCmpLogicalW(x.FullName, y.FullName);
-
-
         }
     }
 }

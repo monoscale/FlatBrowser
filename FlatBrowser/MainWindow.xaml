@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlatBrowser"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Flatbrowser" Height="450" Width="800">
+    <DockPanel>
+        <StackPanel Background="AliceBlue" DockPanel.Dock="Left" Width="100">
+            <Button Style="{StaticResource MenuButton}">Refresh</Button>
+        </StackPanel>
+        <TreeView DockPanel.Dock="Right" ItemsSource="{Binding FolderTreeViews}">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate ItemsSource="{Binding Files}" >
+                    <TextBlock Text="{Binding Folder.Path}"/>
+                    <HierarchicalDataTemplate.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FullName}"/>
+                        </DataTemplate>
+                    </HierarchicalDataTemplate.ItemTemplate>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </DockPanel>
+
 </Window>

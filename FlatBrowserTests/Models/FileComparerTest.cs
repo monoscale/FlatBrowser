@@ -29,7 +29,9 @@ namespace FlatBrowserTests.Models {
 
         [TestMethod]
         public void FileComparerReturnsNumericalFirst() {
-            Assert.AreEqual(-1, fileComparer.Compare(x, y));
+            List<File> files = new List<File>() { x, y };
+            files.Sort(fileComparer);
+            Assert.AreEqual(y, files[0]);
         }
 
 

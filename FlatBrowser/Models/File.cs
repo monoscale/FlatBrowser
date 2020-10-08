@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
 namespace FlatBrowser.Models {
+
+    /// <summary>
+    /// Represents a physical file on the file system.
+    /// </summary>
     public class File {
 
         /// <summary>

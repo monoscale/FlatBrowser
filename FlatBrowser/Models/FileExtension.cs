@@ -6,7 +6,23 @@ using System.Text;
 
 namespace FlatBrowser.Models {
     public class FileExtension {
-        public string Name { get; set; }
+        private string name;
+
+        public string Name {
+            get {
+                return name;
+            }
+            set {
+                if (value[0] != '.') {
+                    value = value.Insert(0, ".");
+                }
+                name = value;
+            }
+        }
+
+        public FileExtension(string name) {
+            Name = name;
+        }
 
 
     }
