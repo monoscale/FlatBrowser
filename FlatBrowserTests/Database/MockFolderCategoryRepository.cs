@@ -12,7 +12,7 @@ namespace FlatBrowserTests.Database {
         private ICollection<FolderCategory> categories;
 
         public MockFolderCategoryRepository(DummyData dummyData) {
-            categories = dummyData.FolderCategeories;
+            categories = dummyData.FolderCategories;
         }
 
         public void Add(FolderCategory folderCategory) {

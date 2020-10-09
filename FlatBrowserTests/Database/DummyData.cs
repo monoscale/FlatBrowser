@@ -18,10 +18,9 @@ namespace FlatBrowserTests {
         public FileExtension BMP => new FileExtension("bmp");
         public FileExtension TXT => new FileExtension("txt");
 
-        public ICollection<FolderCategory> FolderCategeories => new List<FolderCategory> {
+        public ICollection<FolderCategory> FolderCategories => new List<FolderCategory> {
             new FolderCategory(".html", ".bmp"),
             new FolderCategory(".txt")
         };
-
     }
 }

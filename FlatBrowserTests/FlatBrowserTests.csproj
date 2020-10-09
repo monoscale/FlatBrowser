@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <Content Include="TestFolder\Folder1\Folder2\Folder3\Folder4\Folder5\Folder6\Folder7\text4.txt" />
     <Content Include="TestFolder\Folder1\Folder2\image2.bmp" />
     <Content Include="TestFolder\Folder1\web1.html" />
     <Content Include="TestFolder\Folder1\text3.txt" />

@@ -9,14 +9,19 @@
     <DockPanel>
         <StackPanel Background="AliceBlue" DockPanel.Dock="Left" Width="100">
             <Button Style="{StaticResource MenuButton}">Refresh</Button>
+            <Button Style="{StaticResource MenuButton}" Command="{Binding OpenSettingsWindowCommand}">Settings</Button>
         </StackPanel>
-        <TreeView DockPanel.Dock="Right" ItemsSource="{Binding FolderTreeViews}">
+        <TreeView DockPanel.Dock="Right" ItemsSource="{Binding FolderTreeViews}" SelectedItemChanged="TreeView_OnSelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Files}" >
                     <TextBlock Text="{Binding Folder.Path}"/>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding FullName}"/>
+                            <TextBlock>
+                                <TextBlock.InputBindings>
+                                    <MouseBinding MouseAction="LeftClick" Command="{Binding OpenFileCommand}"/>
+                                </TextBlock.InputBindings>
+                            </TextBlock>
                         </DataTemplate>
                     </HierarchicalDataTemplate.ItemTemplate>
                 </HierarchicalDataTemplate>

@@ -1,18 +1,6 @@
 ﻿using FlatBrowser.Database;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FlatBrowser.Models;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace FlatBrowser {
     /// <summary>
@@ -23,6 +11,15 @@ namespace FlatBrowser {
             InitializeComponent();
             using FlatBrowserDBContext dbContext = new FlatBrowserDBContext();
             DataContext = new MainWindowViewModel(new FolderCategoryRepository(dbContext));
+        }
+
+        private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
+            if (e.NewValue.GetType() == typeof(File)) {
+                ((MainWindowViewModel)DataContext).SelectedFile = (File)e.NewValue;
+            } else {
+                ((MainWindowViewModel)DataContext).SelectedFile = null;
+            }
+
         }
     }
 }

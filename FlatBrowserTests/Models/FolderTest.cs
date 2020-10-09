@@ -16,6 +16,7 @@ namespace FlatBrowserTests.Models {
     /// | text2.txt    <br></br>
     /// | image1.bmp   <br></br>
     /// | Folder1      <br></br>
+    /// || web1.html   <br></br>
     /// || text3.txt   <br></br>
     /// || Folder2     <br></br>
     /// ||| image2.bmp <br></br>
@@ -60,9 +61,10 @@ namespace FlatBrowserTests.Models {
 
         [TestMethod]
         public void GetFilesReturnsOnlyRelevantFiles() {
-            folder.FolderCategory = dummyData.FolderCategeories.ElementAt(1);
+            folder.FolderCategory = dummyData.FolderCategories.ElementAt(0);
             Assert.AreEqual(3, folder.GetFiles().Count);
         }
+
     }
 }
 
