@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="FlatBrowser.Models.Folder">
-    <Position X="9" Y="3" Width="2.75" />
+    <Position X="9" Y="4.25" Width="2.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAACAAAAAgAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAIAAAACAAAAAAAAAAAACAAAAAgAAAA=</HashCode>
       <FileName>Models\Folder.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -13,12 +13,12 @@
   <Class Name="FlatBrowser.Models.FileExtension">
     <Position X="4.75" Y="1" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Models\FileExtension.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="FlatBrowser.Models.File">
-    <Position X="4.75" Y="3" Width="2.5" />
+    <Position X="4.75" Y="4.75" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAIAAAAAAAAQAAAAAAAAAAAEAAAAAAAA=</HashCode>
       <FileName>Models\File.cs</FileName>

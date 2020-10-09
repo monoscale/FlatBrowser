@@ -49,6 +49,8 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Database\DummyData.cs" />
+    <Compile Include="Database\MockFolderCategoryRepository.cs" />
     <Compile Include="Models\FileComparerTest.cs" />
     <Compile Include="Models\FileExtensionTest.cs" />
     <Compile Include="Models\FolderCategoryTest.cs" />
@@ -56,6 +58,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +70,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="TestFolder\Folder1\Folder2\image2.bmp" />
+    <Content Include="TestFolder\Folder1\web1.html" />
     <Content Include="TestFolder\Folder1\text3.txt" />
     <Content Include="TestFolder\image1.bmp" />
     <Content Include="TestFolder\text1.txt" />

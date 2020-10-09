@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -12,6 +13,7 @@ namespace FlatBrowser.Models {
     public class Folder {
 
         private string path;
+        [Key]
         public string Path {
             get {
                 return path;

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using FlatBrowser.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -23,12 +24,12 @@ namespace FlatBrowserTests.Models {
     [TestClass]
     public class FolderTest {
 
-        private string projectDirectory;
         private Folder folder;
+        private DummyData dummyData;
         [TestInitialize]
         public void TestInitialize() {
-            projectDirectory = Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
-            folder = new Folder(projectDirectory + "/TestFolder");
+            dummyData = new DummyData();
+            folder = dummyData.TestFolder;
         }
 
         [TestMethod]
@@ -46,7 +47,7 @@ namespace FlatBrowserTests.Models {
         [TestMethod]
         [ExpectedException(typeof(DirectoryNotFoundException))]
         public void NonExistingDirectoryThrowsDirectoryNotFoundException() {
-            new Folder("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx");
+            new Folder(dummyData.FolderThatDoesNotExist);
         }
 
         [TestMethod]
@@ -59,10 +60,7 @@ namespace FlatBrowserTests.Models {
 
         [TestMethod]
         public void GetFilesReturnsOnlyRelevantFiles() {
-            FolderCategory category = new FolderCategory();
-            category.Extensions = new List<FileExtension>() { new FileExtension(".txt") };
-            folder.FolderCategory = category;
-
+            folder.FolderCategory = dummyData.FolderCategeories.ElementAt(1);
             Assert.AreEqual(3, folder.GetFiles().Count);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ namespace FlatBrowser.Models {
     public class FileExtension {
         private string name;
 
+        [Key]
         public string Name {
             get {
                 return name;

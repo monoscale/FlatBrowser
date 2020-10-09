@@ -1,6 +1,9 @@
-﻿using FlatBrowser.Models;
+﻿using FlatBrowser.Database;
+using FlatBrowser.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -8,6 +11,8 @@ using System.Threading.Tasks;
 
 namespace FlatBrowser {
     public class MainWindowViewModel {
+
+        private IFolderCategoryRepository folderCategoryRepository;
 
         public class FolderTreeView {
             public Folder Folder { get; set; }
@@ -21,7 +26,14 @@ namespace FlatBrowser {
 
         public List<FolderTreeView> FolderTreeViews { get; set; }
 
-        public MainWindowViewModel() {
+        public MainWindowViewModel(IFolderCategoryRepository repository) {
+            folderCategoryRepository = repository;
+
+
+            IList<FolderCategory> categories = (from folderCategory in repository.GetAll()
+                                               select folderCategory).ToList();
+
+
             FolderTreeViews = new List<FolderTreeView>() {
                 new FolderTreeView(new Folder("Q:/Source/FlatBrowser/FlatBrowserTests/TestFolder/Folder1")),
                 new FolderTreeView(new Folder("Q:/Source/FlatBrowser/FlatBrowserTests/Models", new FolderCategory(".cs")))
