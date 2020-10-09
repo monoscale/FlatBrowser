@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,8 @@ namespace FlatBrowser.Models {
                 name = value;
             }
         }
+
+        public FileExtension() { }
 
         public FileExtension(string name) {
             Name = name;

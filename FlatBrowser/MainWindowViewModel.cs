@@ -31,13 +31,14 @@ namespace FlatBrowser {
 
 
             IList<FolderCategory> categories = (from folderCategory in repository.GetAll()
-                                               select folderCategory).ToList();
+                                                select folderCategory).ToList();
 
 
-            FolderTreeViews = new List<FolderTreeView>() {
-                new FolderTreeView(new Folder("Q:/Source/FlatBrowser/FlatBrowserTests/TestFolder/Folder1")),
-                new FolderTreeView(new Folder("Q:/Source/FlatBrowser/FlatBrowserTests/Models", new FolderCategory(".cs")))
-            };
+
+
+
+            FolderTreeViews = categories[0].Folders.Select(folder => new FolderTreeView(folder)).ToList();
+
         }
 
     }

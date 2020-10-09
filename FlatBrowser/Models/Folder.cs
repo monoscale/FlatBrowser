@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -32,6 +33,8 @@ namespace FlatBrowser.Models {
         }
 
         public FolderCategory FolderCategory { get; set; }
+
+        public Folder() { }
 
         public Folder(string path) : this(path, new FolderCategory()) { }
 

@@ -21,7 +21,9 @@ namespace FlatBrowser.Database {
         }
 
         public IQueryable<FolderCategory> GetAll() {
-            return categories;
+            return categories
+                .Include(cat => cat.Extensions)
+                .Include(cat => cat.Folders);
         }
 
         public void Remove(FolderCategory folderCategory) {
