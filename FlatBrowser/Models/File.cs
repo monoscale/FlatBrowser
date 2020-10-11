@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -26,9 +27,17 @@ namespace FlatBrowser.Models {
         /// </summary>
         public string FullName { get; private set; }
 
+        public string NameWithExtension {
+            get {
+                return Name + FileExtension.Name;
+            }
+        }
+
 
         public File(string fullName) {
             FullName = fullName;
+            Name = Path.GetFileNameWithoutExtension(fullName);
+            FileExtension = new FileExtension(Path.GetExtension(fullName));
         }
     }
 }

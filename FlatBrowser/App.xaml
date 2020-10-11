@@ -10,5 +10,9 @@
             <Setter Property="BorderBrush" Value="AliceBlue"/>
             <Setter Property="Background" Value="AliceBlue"/>
         </Style>
+
+        <Style TargetType="TextBlock" x:Key="TreeViewTextBlock">
+            <Setter Property="Foreground" Value="CadetBlue"/>
+        </Style>
     </Application.Resources>
 </Application>

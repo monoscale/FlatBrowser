@@ -53,6 +53,7 @@
     <Compile Include="Database\MockFolderCategoryRepository.cs" />
     <Compile Include="Models\FileComparerTest.cs" />
     <Compile Include="Models\FileExtensionTest.cs" />
+    <Compile Include="Models\FileTest.cs" />
     <Compile Include="Models\FolderCategoryTest.cs" />
     <Compile Include="Models\FolderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

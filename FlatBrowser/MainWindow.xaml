@@ -14,10 +14,10 @@
         <TreeView DockPanel.Dock="Right" ItemsSource="{Binding FolderTreeViews}" SelectedItemChanged="TreeView_OnSelectedItemChanged">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate ItemsSource="{Binding Files}" >
-                    <TextBlock Text="{Binding Folder.Path}"/>
+                    <TextBlock Text="{Binding Folder.Path}" Style="{StaticResource TreeViewTextBlock}"/>
                     <HierarchicalDataTemplate.ItemTemplate>
                         <DataTemplate>
-                            <TextBlock>
+                            <TextBlock Text="{Binding NameWithExtension}" Style="{StaticResource TreeViewTextBlock}">
                                 <TextBlock.InputBindings>
                                     <MouseBinding MouseAction="LeftClick" Command="{Binding OpenFileCommand}"/>
                                 </TextBlock.InputBindings>
