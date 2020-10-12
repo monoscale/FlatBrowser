@@ -14,5 +14,10 @@
         <Style TargetType="TextBlock" x:Key="TreeViewTextBlock">
             <Setter Property="Foreground" Value="CadetBlue"/>
         </Style>
+
+        <Style TargetType="TextBlock" x:Key="SettingsHeader">
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
     </Application.Resources>
 </Application>

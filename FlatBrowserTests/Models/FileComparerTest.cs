@@ -18,8 +18,8 @@ namespace FlatBrowserTests.Models {
         public void TestInitialize() {
             fileComparer = new FileComparer();
             // these are not physical files. 
-            x = new File("C:/Test/10fileX");
-            y = new File("C:/Test/9fileY");
+            x = new File("C:/Test/10fileX.txt");
+            y = new File("C:/Test/9fileY.txt");
         }
 
         [TestMethod]

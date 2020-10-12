@@ -22,10 +22,24 @@ namespace FlatBrowser.Models {
         /// </summary>
         public string Name { get; private set; }
 
+
+
+        private string fullName;
         /// <summary>
         /// Gets the full path of the file.
         /// </summary>
-        public string FullName { get; private set; }
+        public string FullName {
+            get {
+                return fullName;
+            }
+            set {
+                if (string.IsNullOrWhiteSpace(value)) {
+                    throw new ArgumentException("[Setter] File.FullName can not be empty");
+                }
+                fullName = value;
+            }
+
+        }
 
         public string NameWithExtension {
             get {
@@ -36,8 +50,11 @@ namespace FlatBrowser.Models {
 
         public File(string fullName) {
             FullName = fullName;
+
             Name = Path.GetFileNameWithoutExtension(fullName);
             FileExtension = new FileExtension(Path.GetExtension(fullName));
+
+
         }
     }
 }

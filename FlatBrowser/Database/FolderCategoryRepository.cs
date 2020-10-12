@@ -26,8 +26,20 @@ namespace FlatBrowser.Database {
                 .Include(cat => cat.Folders);
         }
 
+        public FolderCategory GetById(int id) {
+            return categories.First(c => c.FolderCategoryId == id);
+        }
+
+        public void Edit(FolderCategory folderCategory) {
+            categories.Update(folderCategory);
+        }
+
         public void Remove(FolderCategory folderCategory) {
             categories.Remove(folderCategory);
+        }
+
+        public void SaveChanges() {
+            context.SaveChanges();
         }
     }
 }

@@ -22,5 +22,12 @@ namespace FlatBrowserTests.Models {
             Assert.AreEqual("image2", file.Name);
             Assert.AreEqual(".bmp", file.FileExtension.Name);
         }
+
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void ConstructorThrowsArgumentExceptionWhenNoExtension() {
+            new File("Q:/Source/FlatBrowser/FlatBrowserTests/TestFolder/Folder1/Folder2/image2");
+        }
     }
 }

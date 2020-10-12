@@ -9,8 +9,7 @@ namespace FlatBrowser {
     public partial class MainWindow : Window {
         public MainWindow() {
             InitializeComponent();
-            using FlatBrowserDBContext dbContext = new FlatBrowserDBContext();
-            DataContext = new MainWindowViewModel(new FolderCategoryRepository(dbContext));
+            DataContext = new MainWindowViewModel(new FolderCategoryRepository(new FlatBrowserDBContext()));
         }
 
         private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {

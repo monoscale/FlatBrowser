@@ -16,6 +16,10 @@ namespace FlatBrowser.Models {
                 return name;
             }
             set {
+                if (string.IsNullOrWhiteSpace(value)) {
+                    throw new ArgumentException("[Setter] FileExtension.Name can not be empty");
+                }
+
                 if (value[0] != '.') {
                     value = value.Insert(0, ".");
                 }

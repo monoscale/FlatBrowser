@@ -12,6 +12,7 @@ namespace FlatBrowserTests {
         private string ProjectDirectory => Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
 
         public Folder TestFolder => new Folder(ProjectDirectory + "/TestFolder");
+        public Folder TestFolderForAdd => new Folder(ProjectDirectory + "/TestFolder/Folder1");
         public string FolderThatDoesNotExist => "xxxxxxxxxxxxxxx";
 
         public FileExtension HTML => new FileExtension("html");
@@ -19,8 +20,8 @@ namespace FlatBrowserTests {
         public FileExtension TXT => new FileExtension("txt");
 
         public ICollection<FolderCategory> FolderCategories => new List<FolderCategory> {
-            new FolderCategory(".html", ".bmp"),
-            new FolderCategory(".txt")
+            new FolderCategory(".html", ".bmp") {FolderCategoryId = 1, Folders = new List<Folder>() {TestFolder } },
+            new FolderCategory(".txt") {FolderCategoryId = 2, Folders = new List<Folder>() {TestFolder }}
         };
     }
 }
