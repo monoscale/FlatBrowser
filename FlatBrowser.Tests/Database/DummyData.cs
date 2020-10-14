@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace FlatBrowserTests {
     public class DummyData {
 
-        private string ProjectDirectory => Directory.GetParent(Environment.CurrentDirectory).Parent.FullName;
+        private string ProjectDirectory => Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
 
         public Folder TestFolder => new Folder(ProjectDirectory + "/TestFolder");
         public Folder TestFolderForAdd => new Folder(ProjectDirectory + "/TestFolder/Folder1");

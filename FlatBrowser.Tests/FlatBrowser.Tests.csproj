@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="TestFolder\Folder1\Folder2\Folder3\Folder4\Folder5\Folder6\Folder7\text4.txt" />
+    <None Remove="TestFolder\Folder1\Folder2\image2.bmp" />
+    <None Remove="TestFolder\Folder1\text3.txt" />
+    <None Remove="TestFolder\Folder1\web1.html" />
+    <None Remove="TestFolder\image1.bmp" />
+    <None Remove="TestFolder\text1.txt" />
+    <None Remove="TestFolder\text2.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="TestFolder\Folder1\Folder2\Folder3\Folder4\Folder5\Folder6\Folder7\text4.txt" />
+    <Content Include="TestFolder\Folder1\Folder2\image2.bmp" />
+    <Content Include="TestFolder\Folder1\text3.txt" />
+    <Content Include="TestFolder\Folder1\web1.html" />
+    <Content Include="TestFolder\image1.bmp" />
+    <Content Include="TestFolder\text1.txt" />
+    <Content Include="TestFolder\text2.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+    <PackageReference Include="MSTest.TestAdapter" Version="2.1.0" />
+    <PackageReference Include="MSTest.TestFramework" Version="2.1.0" />
+    <PackageReference Include="coverlet.collector" Version="1.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FlatBrowser\FlatBrowser.csproj" />
+  </ItemGroup>
+
+</Project>

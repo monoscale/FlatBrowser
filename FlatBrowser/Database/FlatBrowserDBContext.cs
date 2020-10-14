@@ -1,11 +1,7 @@
 ﻿using FlatBrowser.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 
 namespace FlatBrowser.Database {
     public class FlatBrowserDBContext : DbContext {
@@ -13,7 +9,7 @@ namespace FlatBrowser.Database {
         public DbSet<FolderCategory> FolderCategories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options) {
-            options.UseSqlite(ConfigurationManager.ConnectionStrings["FlatBrowserDatabase"].ConnectionString);
+            options.UseSqlite("Data Source=flatbrowser.db"); // can't get this from app.json
         }
 
     }
