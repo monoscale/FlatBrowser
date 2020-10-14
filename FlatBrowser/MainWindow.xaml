@@ -11,22 +11,61 @@
             <Button Style="{StaticResource MenuButton}">Refresh</Button>
             <Button Style="{StaticResource MenuButton}" Command="{Binding OpenSettingsWindowCommand}">Settings</Button>
         </StackPanel>
-        <TreeView DockPanel.Dock="Right" ItemsSource="{Binding FolderTreeViews}" SelectedItemChanged="TreeView_OnSelectedItemChanged">
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate ItemsSource="{Binding Files}" >
-                    <TextBlock Text="{Binding Folder.Path}" Style="{StaticResource TreeViewTextBlock}"/>
-                    <HierarchicalDataTemplate.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding NameWithExtension}" Style="{StaticResource TreeViewTextBlock}">
-                                <TextBlock.InputBindings>
-                                    <MouseBinding MouseAction="LeftClick" Command="{Binding OpenFileCommand}"/>
-                                </TextBlock.InputBindings>
-                            </TextBlock>
-                        </DataTemplate>
-                    </HierarchicalDataTemplate.ItemTemplate>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
+
+        <Grid Margin="0,10,0,0" DockPanel.Dock="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <GroupBox Grid.Row="0" Header="Options" DockPanel.Dock="Top">
+                <StackPanel>
+                    <DockPanel>
+                        <Label DockPanel.Dock="Left" Content="Search"/>
+                        <TextBox Style="{StaticResource DefaultTextBox}" DockPanel.Dock="Right" />
+                    </DockPanel>
+                    <StackPanel Margin="0,10,0,0" Orientation="Horizontal">
+                        <ComboBox ItemsSource="{Binding FolderCategories}" SelectedItem="{Binding SelectedFolderCategory}">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                        <Button Content="Collapse All"></Button>
+                        <Button Content="Show All"></Button>
+                    </StackPanel>
+                </StackPanel>
+            </GroupBox>
+
+
+
+            <TreeView Grid.Row="1"  ItemsSource="{Binding FolderTreeViews}" 
+                      SelectedItemChanged="TreeView_OnSelectedItemChanged"
+                      ScrollViewer.VerticalScrollBarVisibility="Visible"
+                      >
+                <TreeView.ItemContainerStyle>
+                    <Style TargetType="{x:Type TreeViewItem}">
+                        <Setter Property="IsExpanded" Value="True"/>
+                    </Style>
+                </TreeView.ItemContainerStyle>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate ItemsSource="{Binding Files}" >
+                        <TextBlock Text="{Binding Folder.Path}" Style="{StaticResource TreeViewTextBlock}"/>
+                        <HierarchicalDataTemplate.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding NameWithExtension}" Style="{StaticResource TreeViewTextBlock}">
+                                    <TextBlock.InputBindings>
+                                        <MouseBinding MouseAction="LeftClick" Command="{Binding OpenFileCommand}"/>
+                                    </TextBlock.InputBindings>
+                                </TextBlock>
+                            </DataTemplate>
+                        </HierarchicalDataTemplate.ItemTemplate>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+
+        </Grid>
+
     </DockPanel>
 
 </Window>

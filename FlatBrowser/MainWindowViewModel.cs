@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace FlatBrowser {
-    public class MainWindowViewModel {
+    public class MainWindowViewModel : ViewModelBase {
 
         private IFolderCategoryRepository folderCategoryRepository;
         public class FolderTreeView {
@@ -24,9 +24,25 @@ namespace FlatBrowser {
                 Files = folder.GetFiles();
             }
         }
-        public List<FolderTreeView> FolderTreeViews { get; set; }
+
+        private List<FolderTreeView> folderTreeViews;
+        public List<FolderTreeView> FolderTreeViews {
+            get { return folderTreeViews; }
+            set { SetProperty(ref folderTreeViews, value); }
+        }
 
         public File SelectedFile { get; set; }
+
+
+        private FolderCategory selectedFolderCategory;
+        public FolderCategory SelectedFolderCategory {
+            get { return selectedFolderCategory; }
+            set {
+                SetProperty(ref selectedFolderCategory, value);
+                UpdateTreeView();
+            }
+        }
+        public ICollection<FolderCategory> FolderCategories { get; set; }
 
         public RelayCommand OpenSettingsWindowCommand { get; private set; }
         public RelayCommand OpenFileCommand { get; private set; }
@@ -34,13 +50,17 @@ namespace FlatBrowser {
         public MainWindowViewModel(IFolderCategoryRepository repository) {
             folderCategoryRepository = repository;
 
-            IList<FolderCategory> categories = (from folderCategory in repository.GetAll()
-                                                select folderCategory).ToList();
-
-            FolderTreeViews = categories[0].Folders.Select(folder => new FolderTreeView(folder)).ToList();
+            FolderCategories = (from folderCategory in repository.GetAll()
+                                select folderCategory).ToList();
+            SelectedFolderCategory = FolderCategories.ElementAt(0);
+            UpdateTreeView();
 
             OpenSettingsWindowCommand = new RelayCommand(OpenSettingsWindow);
             OpenFileCommand = new RelayCommand(OpenFile, IsFileSelected);
+        }
+
+        private void UpdateTreeView() {
+            FolderTreeViews = SelectedFolderCategory.Folders.Select(folder => new FolderTreeView(folder)).ToList();
         }
 
         private void OpenSettingsWindow() {
