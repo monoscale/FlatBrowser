@@ -73,7 +73,10 @@ namespace FlatBrowser {
         }
 
         private void OpenFile() {
-
+            OpenFile(SelectedFile);
+        }
+        public void OpenFile(File file) {
+            Process.Start(file.FullName);
         }
 
     }

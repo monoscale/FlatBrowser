@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlatBrowser"
         mc:Ignorable="d"
-        Title="Flatbrowser" Height="450" Width="800">
+        Title="Flatbrowser" Height="800" Width="600">
     <DockPanel>
         <StackPanel Background="AliceBlue" DockPanel.Dock="Left" Width="100">
             <Button Style="{StaticResource MenuButton}">Refresh</Button>
@@ -55,7 +55,7 @@
                             <DataTemplate>
                                 <TextBlock Text="{Binding NameWithExtension}" Style="{StaticResource TreeViewTextBlock}">
                                     <TextBlock.InputBindings>
-                                        <MouseBinding MouseAction="LeftClick" Command="{Binding OpenFileCommand}"/>
+                                        <MouseBinding MouseAction="LeftDoubleClick" Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}, Path=DataContext.OpenFileCommand}" CommandParameter="{Binding Path=.}"/>
                                     </TextBlock.InputBindings>
                                 </TextBlock>
                             </DataTemplate>
