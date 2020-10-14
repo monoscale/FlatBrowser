@@ -2,7 +2,7 @@
 
 namespace FlatBrowser.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -23,12 +23,14 @@ namespace FlatBrowser.Migrations
                 name: "FileExtension",
                 columns: table => new
                 {
-                    Name = table.Column<string>(nullable: false),
+                    FileExtensionId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true),
                     FolderCategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FileExtension", x => x.Name);
+                    table.PrimaryKey("PK_FileExtension", x => x.FileExtensionId);
                     table.ForeignKey(
                         name: "FK_FileExtension_FolderCategories_FolderCategoryId",
                         column: x => x.FolderCategoryId,
@@ -41,12 +43,14 @@ namespace FlatBrowser.Migrations
                 name: "Folder",
                 columns: table => new
                 {
-                    Path = table.Column<string>(nullable: false),
+                    FolderId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Path = table.Column<string>(nullable: true),
                     FolderCategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Folder", x => x.Path);
+                    table.PrimaryKey("PK_Folder", x => x.FolderId);
                     table.ForeignKey(
                         name: "FK_Folder_FolderCategories_FolderCategoryId",
                         column: x => x.FolderCategoryId,

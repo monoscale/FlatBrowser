@@ -19,7 +19,11 @@ namespace FlatBrowser.Models {
         public virtual ICollection<Folder> Folders { get; set; }
 
 
+
         public FolderCategory() : this(new List<Folder>(), new List<FileExtension>()) { }
+        public FolderCategory(string name) : this() {
+            Name = name;
+        }
         public FolderCategory(params string[] extensions) : this(new List<Folder>(), extensions.Select(ext => new FileExtension(ext)).ToList()) { }
         public FolderCategory(Folder folder, ICollection<FileExtension> extensions) : this(new List<Folder>() { folder }, extensions) { }
         public FolderCategory(ICollection<Folder> folders, FileExtension extension) : this(folders, new List<FileExtension>() { extension }) { }

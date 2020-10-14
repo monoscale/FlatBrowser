@@ -32,6 +32,20 @@ namespace FlatBrowserTests.ViewModels {
         }
 
         [TestMethod]
+        public void AddFolderCategoryAddsToRepository() {
+            int originalCount = mockRepository.GetAll().Count();
+            vm.AddFolderCategory("testName");
+            Assert.AreEqual(originalCount + 1, mockRepository.GetAll().Count());
+        }
+
+        [TestMethod]
+        public void DeleteFolderCategoryRemovesFromRepository() {
+            int originalCount = mockRepository.GetAll().Count();
+            vm.DeleteFolderCategory(GetFolderCategory());
+            Assert.AreEqual(originalCount - 1, mockRepository.GetAll().Count());
+        }
+
+        [TestMethod]
         public void AddFolderAddsToRepository() {
 
             int originalCount = fc.Folders.Count;
@@ -65,16 +79,25 @@ namespace FlatBrowserTests.ViewModels {
             Assert.AreEqual(originalCount - 1, fc.Extensions.Count);
         }
 
+
+        [TestMethod]
+        public void AddCategoryCallsSaveChanges() {
+            vm.AddFolderCategory("categoryName");
+            Assert.IsTrue(mockRepository.IsSaved);
+        }
+
+        [TestMethod]
+        public void DeleteCategoryCallsSaveChanges() {
+            vm.DeleteFolderCategory(new FolderCategory());
+            Assert.IsTrue(mockRepository.IsSaved);
+        }
+
         [TestMethod]
         public void AddFolderCallsSaveChanges() {
             vm.AddFolder(dummyData.TestFolder.Path);
             Assert.IsTrue(mockRepository.IsSaved);
         }
-        [TestMethod]
-        public void EditFolderCallsSaveChanges() {
-            vm.EditFolder(new Folder());
-            Assert.IsTrue(mockRepository.IsSaved);
-        }
+
         [TestMethod]
         public void DeleteFolderCallsSaveChanges() {
             vm.DeleteFolder(new Folder());
@@ -86,11 +109,7 @@ namespace FlatBrowserTests.ViewModels {
             vm.AddFileExtension(".test");
             Assert.IsTrue(mockRepository.IsSaved);
         }
-        [TestMethod]
-        public void EditExtensionCallsSaveChanges() {
-            vm.EditFileExtension(fc.Extensions.ElementAt(0));
-            Assert.IsTrue(mockRepository.IsSaved);
-        }
+
         [TestMethod]
         public void DeleteExtensionCallsSaveChanges() {
             vm.DeleteFileExtension(fc.Extensions.ElementAt(0));

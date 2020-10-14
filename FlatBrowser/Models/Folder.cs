@@ -13,8 +13,9 @@ namespace FlatBrowser.Models {
     /// </summary>
     public class Folder {
 
+        public int FolderId { get; set; }
+
         private string path;
-        [Key]
         public string Path {
             get {
                 return path;

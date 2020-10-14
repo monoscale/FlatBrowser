@@ -8,9 +8,12 @@ using System.Text;
 
 namespace FlatBrowser.Models {
     public class FileExtension {
+
+
+        public int FileExtensionId { get; set; }
+
         private string name;
 
-        [Key]
         public string Name {
             get {
                 return name;

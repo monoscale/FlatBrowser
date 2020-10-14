@@ -18,13 +18,17 @@ namespace FlatBrowser.Migrations
 
             modelBuilder.Entity("FlatBrowser.Models.FileExtension", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("FileExtensionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("FolderCategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FileExtensionId");
 
                     b.HasIndex("FolderCategoryId");
 
@@ -33,13 +37,17 @@ namespace FlatBrowser.Migrations
 
             modelBuilder.Entity("FlatBrowser.Models.Folder", b =>
                 {
-                    b.Property<string>("Path")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("FolderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("FolderCategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Path");
+                    b.Property<string>("Path")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FolderId");
 
                     b.HasIndex("FolderCategoryId");
 

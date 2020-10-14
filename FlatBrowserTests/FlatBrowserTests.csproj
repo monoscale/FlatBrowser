@@ -57,6 +57,7 @@
     <Compile Include="Models\FolderCategoryTest.cs" />
     <Compile Include="Models\FolderTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\MainWindowTest.cs" />
     <Compile Include="ViewModels\SettingsWindowTest.cs" />
   </ItemGroup>
   <ItemGroup>

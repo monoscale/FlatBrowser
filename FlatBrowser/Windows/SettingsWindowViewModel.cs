@@ -1,98 +1,156 @@
 ﻿using FlatBrowser.Database;
 using FlatBrowser.Models;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace FlatBrowser.Windows {
-    public class SettingsWindowViewModel {
+    public class SettingsWindowViewModel : ViewModelBase {
 
         private IFolderCategoryRepository folderCategoryRepository;
 
-        public IList<FolderCategory> FolderCategories { get; set; }
+
+        private string error;
+        public string Error {
+            get { return error; }
+            set { SetProperty(ref error, value); }
+        }
+
+
+        public ObservableCollection<FolderCategory> FolderCategories { get; set; }
+
+        public string NewFolderCategory { get; set; }
 
         private FolderCategory selectedFolderCategory;
         public FolderCategory SelectedFolderCategory {
-            get {
-                return selectedFolderCategory;
-            }
+            get { return selectedFolderCategory; }
             set {
-                this.selectedFolderCategory = value;
-                Folders = SelectedFolderCategory.Folders;
-                Extensions = SelectedFolderCategory.Extensions;
+                SetProperty(ref selectedFolderCategory, value);
+                Folders = new ObservableCollection<Folder>(SelectedFolderCategory.Folders);
+                Extensions = new ObservableCollection<FileExtension>(SelectedFolderCategory.Extensions);
             }
         }
 
-        public ICollection<Folder> Folders { get; set; }
+        private ObservableCollection<Folder> folders;
+        public ObservableCollection<Folder> Folders {
+            get { return folders; }
+            set { SetProperty(ref folders, value); }
+        }
+
+        private ObservableCollection<FileExtension> extensions;
+        public ObservableCollection<FileExtension> Extensions {
+            get { return extensions; }
+            set { SetProperty(ref extensions, value); }
+        }
 
 
 
         public string NewFileExtension { get; set; }
-
-
         public FileExtension SelectedFileExtension { get; set; }
 
 
 
-        public ICollection<FileExtension> Extensions { get; set; }
+        public RelayCommand AddFolderCategoryCommand { get; private set; }
+        public RelayCommand<FolderCategory> DeleteFolderCategoryCommand { get; private set; }
 
-
-        public RelayCommand<string> AddFileExtensionCommand { get; private set; }
-        public RelayCommand<FileExtension> EditFileExtensionCommand { get; private set; }
+        public RelayCommand AddFileExtensionCommand { get; private set; }
         public RelayCommand<FileExtension> DeleteFileExtensionCommand { get; private set; }
+
+        public RelayCommand AddFolderCommand { get; private set; }
+        public RelayCommand<Folder> DeleteFolderCommand { get; private set; }
+
 
         public SettingsWindowViewModel(IFolderCategoryRepository folderCategoryRepository) {
             this.folderCategoryRepository = folderCategoryRepository;
-            FolderCategories = folderCategoryRepository.GetAll().ToList();
+            FolderCategories = new ObservableCollection<FolderCategory>(folderCategoryRepository.GetAll());
             SelectedFolderCategory = FolderCategories[0];
-            Folders = SelectedFolderCategory.Folders;
-            Extensions = SelectedFolderCategory.Extensions;
+            Folders = new ObservableCollection<Folder>(SelectedFolderCategory.Folders);
+            Extensions = new ObservableCollection<FileExtension>(SelectedFolderCategory.Extensions);
 
+            AddFolderCategoryCommand = new RelayCommand(AddFolderCategory);
+            DeleteFolderCategoryCommand = new RelayCommand<FolderCategory>(DeleteFolderCategory);
 
-            AddFileExtensionCommand = new RelayCommand<string>(AddFileExtension);
-            EditFileExtensionCommand = new RelayCommand<FileExtension>(EditFileExtension);
+            AddFileExtensionCommand = new RelayCommand(AddFileExtension);
             DeleteFileExtensionCommand = new RelayCommand<FileExtension>(DeleteFileExtension);
+
+            AddFolderCommand = new RelayCommand(ChooseFolder);
+            DeleteFolderCommand = new RelayCommand<Folder>(DeleteFolder);
 
         }
 
+
+
+        private void AddFolderCategory() {
+            AddFolderCategory(NewFolderCategory);
+        }
+
+        public void AddFolderCategory(string categoryName) {
+            FolderCategory folderCategory = new FolderCategory(categoryName);
+            folderCategoryRepository.Add(folderCategory);
+            FolderCategories.Add(folderCategory);
+            folderCategoryRepository.SaveChanges();
+        }
+
+        public void DeleteFolderCategory(FolderCategory folderCategory) {
+            folderCategoryRepository.Remove(folderCategory);
+            folderCategoryRepository.SaveChanges();
+            FolderCategories.Remove(folderCategory);
+            if (FolderCategories.Count > 0) {
+                SelectedFolderCategory = FolderCategories[0];
+            }
+        }
+
+        private void ChooseFolder() {
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            DialogResult result = folderBrowserDialog.ShowDialog();
+            if (result == DialogResult.OK) {
+                string path = folderBrowserDialog.SelectedPath;
+                AddFolder(path);
+            }
+        }
         public void AddFolder(string path) {
             Folder folder = new Folder(path);
             SelectedFolderCategory.Folders.Add(folder);
             folderCategoryRepository.Edit(SelectedFolderCategory);
             folderCategoryRepository.SaveChanges();
-        }
-
-        public void EditFolder(Folder folder) {
-            throw new NotImplementedException();
+            Folders.Add(folder);
         }
 
         public void DeleteFolder(Folder folder) {
             SelectedFolderCategory.Folders.Remove(folder);
             folderCategoryRepository.Edit(SelectedFolderCategory);
             folderCategoryRepository.SaveChanges();
+            Folders.Remove(folder);
         }
 
+
+        /// <summary>
+        /// This method is used by the command.
+        /// </summary>
+        private void AddFileExtension() {
+            AddFileExtension(NewFileExtension);
+        }
         public void AddFileExtension(string extension) {
-            FileExtension fileExtension = new FileExtension(extension);
-            SelectedFolderCategory.Extensions.Add(fileExtension);
-            folderCategoryRepository.Edit(SelectedFolderCategory);
-            folderCategoryRepository.SaveChanges();
+            try {
+                FileExtension fileExtension = new FileExtension(extension);
+                SelectedFolderCategory.Extensions.Add(fileExtension);
+                folderCategoryRepository.Edit(SelectedFolderCategory);
+                folderCategoryRepository.SaveChanges();
+                Extensions.Add(fileExtension);
+            } catch (ArgumentException ae) {
+                Error = ae.Message;
+            }
         }
 
-        public void EditFileExtension(FileExtension parameter) {
-            FileExtension original = SelectedFolderCategory.Extensions.First(ext => ext.Name == parameter.Name);
-            original.Name = parameter.Name;
-            folderCategoryRepository.Edit(SelectedFolderCategory);
-            folderCategoryRepository.SaveChanges();
-        }
 
         public void DeleteFileExtension(FileExtension parameter) {
             SelectedFolderCategory.Extensions.Remove(parameter);
             folderCategoryRepository.Edit(SelectedFolderCategory);
             folderCategoryRepository.SaveChanges();
+            Extensions.Remove(parameter);
 
         }
     }

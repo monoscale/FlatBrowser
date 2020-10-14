@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlatBrowser.Migrations
 {
     [DbContext(typeof(FlatBrowserDBContext))]
-    [Migration("20201009152441_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20201012182957_Create")]
+    partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,13 +20,17 @@ namespace FlatBrowser.Migrations
 
             modelBuilder.Entity("FlatBrowser.Models.FileExtension", b =>
                 {
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("FileExtensionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("FolderCategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Name");
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FileExtensionId");
 
                     b.HasIndex("FolderCategoryId");
 
@@ -35,13 +39,17 @@ namespace FlatBrowser.Migrations
 
             modelBuilder.Entity("FlatBrowser.Models.Folder", b =>
                 {
-                    b.Property<string>("Path")
-                        .HasColumnType("TEXT");
+                    b.Property<int>("FolderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
                     b.Property<int?>("FolderCategoryId")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("Path");
+                    b.Property<string>("Path")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("FolderId");
 
                     b.HasIndex("FolderCategoryId");
 
