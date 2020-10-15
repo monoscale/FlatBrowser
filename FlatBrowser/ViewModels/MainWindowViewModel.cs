@@ -4,23 +4,15 @@ using FlatBrowser.Windows;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 
 namespace FlatBrowser.ViewModels {
     public class MainWindowViewModel : ViewModelBase {
 
         private IFolderCategoryRepository folderCategoryRepository;
-        public class FolderTreeView {
-            public Folder Folder { get; set; }
-            public IList<File> Files { get; set; }
 
-            public FolderTreeView(Folder folder) {
-                Folder = folder;
-                Files = folder.GetFiles();
-            }
-        }
-
-        private List<FolderTreeView> folderTreeViews;
-        public List<FolderTreeView> FolderTreeViews {
+        private IList<FolderTreeViewModel> folderTreeViews;
+        public IList<FolderTreeViewModel> FolderTreeViews {
             get { return folderTreeViews; }
             set { SetProperty(ref folderTreeViews, value); }
         }
@@ -38,7 +30,14 @@ namespace FlatBrowser.ViewModels {
         public ICollection<FolderCategory> FolderCategories { get; set; }
 
 
-        public string SearchText { get; set; }
+        private string searchText;
+        public string SearchText {
+            get { return searchText; }
+            set {
+                SetProperty(ref searchText, value);
+                FilterTreeView();
+            }
+        }
 
 
         public RelayCommand OpenSettingsWindowCommand { get; private set; }
@@ -66,7 +65,19 @@ namespace FlatBrowser.ViewModels {
         }
 
         private void UpdateTreeView() {
-            FolderTreeViews = SelectedFolderCategory.Folders.Select(folder => new FolderTreeView(folder)).ToList();
+            FolderTreeViews = SelectedFolderCategory.Folders.Select(folder => new FolderTreeViewModel(folder)).ToList();
+        }
+
+        private void FilterTreeView() {
+            foreach (FolderTreeViewModel viewModel in FolderTreeViews) {
+                foreach (FileViewModel fileViewModel in viewModel.Files) {
+                    if (!fileViewModel.Name.Contains(SearchText)) {
+                        fileViewModel.Visibility = Visibility.Collapsed;
+                    } else {
+                        fileViewModel.Visibility = Visibility.Visible;
+                    }
+                }
+            }
         }
 
         private void OpenSettingsWindow() {
