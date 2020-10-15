@@ -46,17 +46,26 @@ namespace FlatBrowser {
 
         public RelayCommand OpenSettingsWindowCommand { get; private set; }
         public RelayCommand OpenFileCommand { get; private set; }
+        public RelayCommand RefreshWindowCommand { get; private set; }
 
         public MainWindowViewModel(IFolderCategoryRepository repository) {
             folderCategoryRepository = repository;
 
-            FolderCategories = (from folderCategory in repository.GetAll()
-                                select folderCategory).ToList();
-            SelectedFolderCategory = FolderCategories.ElementAt(0);
-            UpdateTreeView();
+            RefreshWindow();
 
             OpenSettingsWindowCommand = new RelayCommand(OpenSettingsWindow);
             OpenFileCommand = new RelayCommand(OpenFile, IsFileSelected);
+            RefreshWindowCommand = new RelayCommand(RefreshWindow);
+        }
+
+        private void RefreshWindow() {
+            FolderCategories = (from folderCategory in folderCategoryRepository.GetAll()
+                                select folderCategory).ToList();
+            if(FolderCategories.Count > 0) {
+                SelectedFolderCategory = FolderCategories.ElementAt(0);
+            }
+            
+            UpdateTreeView();
         }
 
         private void UpdateTreeView() {
