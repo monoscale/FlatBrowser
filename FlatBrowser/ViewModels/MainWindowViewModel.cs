@@ -1,17 +1,11 @@
 ﻿using FlatBrowser.Database;
 using FlatBrowser.Models;
 using FlatBrowser.Windows;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Dynamic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
 
-namespace FlatBrowser {
+namespace FlatBrowser.ViewModels {
     public class MainWindowViewModel : ViewModelBase {
 
         private IFolderCategoryRepository folderCategoryRepository;
@@ -33,7 +27,6 @@ namespace FlatBrowser {
 
         public File SelectedFile { get; set; }
 
-
         private FolderCategory selectedFolderCategory;
         public FolderCategory SelectedFolderCategory {
             get { return selectedFolderCategory; }
@@ -43,6 +36,10 @@ namespace FlatBrowser {
             }
         }
         public ICollection<FolderCategory> FolderCategories { get; set; }
+
+
+        public string SearchText { get; set; }
+
 
         public RelayCommand OpenSettingsWindowCommand { get; private set; }
         public RelayCommand OpenFileCommand { get; private set; }
@@ -61,10 +58,10 @@ namespace FlatBrowser {
         private void RefreshWindow() {
             FolderCategories = (from folderCategory in folderCategoryRepository.GetAll()
                                 select folderCategory).ToList();
-            if(FolderCategories.Count > 0) {
+            if (FolderCategories.Count > 0) {
                 SelectedFolderCategory = FolderCategories.ElementAt(0);
             }
-            
+
             UpdateTreeView();
         }
 

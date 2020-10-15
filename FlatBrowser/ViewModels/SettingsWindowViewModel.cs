@@ -1,13 +1,11 @@
 ﻿using FlatBrowser.Database;
 using FlatBrowser.Models;
-using Microsoft.Win32;
+using FlatBrowser.Windows;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
 using System.Windows.Forms;
 
-namespace FlatBrowser.Windows {
+namespace FlatBrowser.ViewModels {
     public class SettingsWindowViewModel : ViewModelBase {
 
         private IFolderCategoryRepository folderCategoryRepository;

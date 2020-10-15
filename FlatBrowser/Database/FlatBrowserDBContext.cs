@@ -1,7 +1,5 @@
 ﻿using FlatBrowser.Models;
 using Microsoft.EntityFrameworkCore;
-using System.Configuration;
-using Microsoft.Extensions.Configuration;
 
 namespace FlatBrowser.Database {
     public class FlatBrowserDBContext : DbContext {

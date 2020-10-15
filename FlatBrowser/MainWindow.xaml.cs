@@ -1,5 +1,6 @@
 ﻿using FlatBrowser.Database;
 using FlatBrowser.Models;
+using FlatBrowser.ViewModels;
 using System.Windows;
 
 namespace FlatBrowser {
