@@ -42,14 +42,10 @@ namespace FlatBrowser.Models {
 
         public IList<File> GetFiles() {
             DirectoryInfo directory = new DirectoryInfo(Path);
-            List<FileInfo> tmpFiles = new List<FileInfo>();
-
-            foreach (FileExtension fileExtension in FolderCategory.Extensions) {
-                string extName = fileExtension.Name;
-                tmpFiles.AddRange(directory.GetFiles("*" + extName, SearchOption.AllDirectories));
+            List<File> files = new List<File>();
+            foreach (FileExtension extension in FolderCategory.Extensions) {
+                files.AddRange(directory.GetFiles("*" + extension.Name, SearchOption.AllDirectories).Select(fi => new File(fi.FullName)));
             }
-
-            List<File> files = tmpFiles.Select(f => new File(f.FullName)).ToList();
             files.Sort(new FileComparer());
             return files;
         }
