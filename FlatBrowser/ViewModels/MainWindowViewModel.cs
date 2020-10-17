@@ -59,9 +59,8 @@ namespace FlatBrowser.ViewModels {
                                 select folderCategory).ToList();
             if (FolderCategories.Count > 0) {
                 SelectedFolderCategory = FolderCategories.ElementAt(0);
+                UpdateTreeView();
             }
-
-            UpdateTreeView();
         }
 
         private void UpdateTreeView() {

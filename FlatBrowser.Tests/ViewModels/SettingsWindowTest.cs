@@ -1,13 +1,8 @@
-﻿using FlatBrowser.Database;
-using FlatBrowser.Models;
-using FlatBrowser.Windows;
+﻿using FlatBrowser.Models;
+using FlatBrowser.ViewModels;
 using FlatBrowserTests.Database;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlatBrowserTests.ViewModels {
     [TestClass]

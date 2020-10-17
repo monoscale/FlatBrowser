@@ -9,14 +9,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlatBrowser.Migrations
 {
     [DbContext(typeof(FlatBrowserDBContext))]
-    [Migration("20201012182957_Create")]
-    partial class Create
+    [Migration("20201017171832_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8");
+                .HasAnnotation("ProductVersion", "3.1.9");
 
             modelBuilder.Entity("FlatBrowser.Models.FileExtension", b =>
                 {

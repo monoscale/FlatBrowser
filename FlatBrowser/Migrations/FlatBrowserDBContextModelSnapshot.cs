@@ -14,7 +14,7 @@ namespace FlatBrowser.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.8");
+                .HasAnnotation("ProductVersion", "3.1.9");
 
             modelBuilder.Entity("FlatBrowser.Models.FileExtension", b =>
                 {

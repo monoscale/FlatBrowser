@@ -2,7 +2,7 @@
 
 namespace FlatBrowser.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,63 +20,63 @@ namespace FlatBrowser.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FileExtensions",
+                name: "FileExtension",
                 columns: table => new
                 {
                     FileExtensionId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    FolderCategoryId = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: true)
+                    Name = table.Column<string>(nullable: true),
+                    FolderCategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FileExtensions", x => new { x.FileExtensionId, x.FolderCategoryId });
+                    table.PrimaryKey("PK_FileExtension", x => x.FileExtensionId);
                     table.ForeignKey(
-                        name: "FK_FileExtensions_FolderCategories_FolderCategoryId",
+                        name: "FK_FileExtension_FolderCategories_FolderCategoryId",
                         column: x => x.FolderCategoryId,
                         principalTable: "FolderCategories",
                         principalColumn: "FolderCategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Folders",
+                name: "Folder",
                 columns: table => new
                 {
                     FolderId = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    FolderCategoryId = table.Column<int>(nullable: false),
-                    Path = table.Column<string>(nullable: true)
+                    Path = table.Column<string>(nullable: true),
+                    FolderCategoryId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Folders", x => new { x.FolderId, x.FolderCategoryId });
+                    table.PrimaryKey("PK_Folder", x => x.FolderId);
                     table.ForeignKey(
-                        name: "FK_Folders_FolderCategories_FolderCategoryId",
+                        name: "FK_Folder_FolderCategories_FolderCategoryId",
                         column: x => x.FolderCategoryId,
                         principalTable: "FolderCategories",
                         principalColumn: "FolderCategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_FileExtensions_FolderCategoryId",
-                table: "FileExtensions",
+                name: "IX_FileExtension_FolderCategoryId",
+                table: "FileExtension",
                 column: "FolderCategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Folders_FolderCategoryId",
-                table: "Folders",
+                name: "IX_Folder_FolderCategoryId",
+                table: "Folder",
                 column: "FolderCategoryId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FileExtensions");
+                name: "FileExtension");
 
             migrationBuilder.DropTable(
-                name: "Folders");
+                name: "Folder");
 
             migrationBuilder.DropTable(
                 name: "FolderCategories");
