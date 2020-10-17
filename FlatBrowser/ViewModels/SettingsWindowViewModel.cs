@@ -27,8 +27,10 @@ namespace FlatBrowser.ViewModels {
             get { return selectedFolderCategory; }
             set {
                 SetProperty(ref selectedFolderCategory, value);
-                Folders = new ObservableCollection<Folder>(SelectedFolderCategory.Folders);
-                Extensions = new ObservableCollection<FileExtension>(SelectedFolderCategory.Extensions);
+                if (value != null) {
+                    Folders = new ObservableCollection<Folder>(SelectedFolderCategory.Folders);
+                    Extensions = new ObservableCollection<FileExtension>(SelectedFolderCategory.Extensions);
+                }
             }
         }
 
@@ -64,22 +66,27 @@ namespace FlatBrowser.ViewModels {
         public SettingsWindowViewModel(IFolderCategoryRepository folderCategoryRepository) {
             this.folderCategoryRepository = folderCategoryRepository;
             FolderCategories = new ObservableCollection<FolderCategory>(folderCategoryRepository.GetAll());
-            SelectedFolderCategory = FolderCategories[0];
-            Folders = new ObservableCollection<Folder>(SelectedFolderCategory.Folders);
-            Extensions = new ObservableCollection<FileExtension>(SelectedFolderCategory.Extensions);
+            if (FolderCategories.Count > 0) {
+                SelectedFolderCategory = FolderCategories[0];
+                Folders = new ObservableCollection<Folder>(SelectedFolderCategory.Folders);
+                Extensions = new ObservableCollection<FileExtension>(SelectedFolderCategory.Extensions);
+            }
+
 
             AddFolderCategoryCommand = new RelayCommand(AddFolderCategory);
             DeleteFolderCategoryCommand = new RelayCommand<FolderCategory>(DeleteFolderCategory);
 
-            AddFileExtensionCommand = new RelayCommand(AddFileExtension);
+            AddFileExtensionCommand = new RelayCommand(AddFileExtension, IsFolderCategorySelected);
             DeleteFileExtensionCommand = new RelayCommand<FileExtension>(DeleteFileExtension);
 
-            AddFolderCommand = new RelayCommand(ChooseFolder);
+            AddFolderCommand = new RelayCommand(ChooseFolder, IsFolderCategorySelected);
             DeleteFolderCommand = new RelayCommand<Folder>(DeleteFolder);
 
         }
 
-
+        private bool IsFolderCategorySelected() {
+            return SelectedFolderCategory != null;
+        }
 
         private void AddFolderCategory() {
             AddFolderCategory(NewFolderCategory);

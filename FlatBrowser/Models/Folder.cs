@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Linq;
 
@@ -9,6 +10,7 @@ namespace FlatBrowser.Models {
     /// </summary>
     public class Folder {
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FolderId { get; set; }
 
         private string path;

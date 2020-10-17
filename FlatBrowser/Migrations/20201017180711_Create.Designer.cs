@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FlatBrowser.Migrations
 {
     [DbContext(typeof(FlatBrowserDBContext))]
-    [Migration("20201017171832_Initial")]
-    partial class Initial
+    [Migration("20201017180711_Create")]
+    partial class Create
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

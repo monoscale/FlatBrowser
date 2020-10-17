@@ -20,8 +20,13 @@ namespace FlatBrowserTests {
         public FileExtension TXT => new FileExtension("txt");
 
         public ICollection<FolderCategory> FolderCategories => new List<FolderCategory> {
-            new FolderCategory(".html", ".bmp") {FolderCategoryId = 1, Folders = new List<Folder>() {TestFolder } },
-            new FolderCategory(".txt") {FolderCategoryId = 2, Folders = new List<Folder>() {TestFolder }}
+            new FolderCategory(".html", ".bmp") {Name="Test1", FolderCategoryId = 1},
+            new FolderCategory(".txt") {Name="Test2",FolderCategoryId = 2, Folders = new List<Folder>() {TestFolder }}
         };
+
+        public DummyData() {
+            TestFolder.FolderCategory = FolderCategories.ElementAt(0);
+            FolderCategories.ElementAt(0).Folders.Add(TestFolder);
+        }
     }
 }

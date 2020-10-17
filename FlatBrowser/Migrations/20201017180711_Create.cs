@@ -2,7 +2,7 @@
 
 namespace FlatBrowser.Migrations
 {
-    public partial class Initial : Migration
+    public partial class Create : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

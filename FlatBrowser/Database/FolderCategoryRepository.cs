@@ -28,6 +28,7 @@ namespace FlatBrowser.Database {
 
         public void Edit(FolderCategory folderCategory) {
             categories.Update(folderCategory);
+            categories.FromSqlRaw("DELETE FROM FileExtensions WHERE FolderCategoryId=NULL");
         }
 
         public void Remove(FolderCategory folderCategory) {
@@ -36,6 +37,11 @@ namespace FlatBrowser.Database {
 
         public void SaveChanges() {
             context.SaveChanges();
+
+            // dirty hacks incoming...
+            // After an Edit, children of FolderCategory (folder and fileextension) could become orphans
+            context.Database.ExecuteSqlRaw("DELETE FROM FileExtension WHERE FolderCategoryId IS NULL");
+            context.Database.ExecuteSqlRaw("DELETE FROM Folder WHERE FolderCategoryId IS NULL");
         }
     }
 }

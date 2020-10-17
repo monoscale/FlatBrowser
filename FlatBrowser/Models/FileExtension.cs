@@ -1,9 +1,10 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace FlatBrowser.Models {
     public class FileExtension {
 
-
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FileExtensionId { get; set; }
 
         private string name;
