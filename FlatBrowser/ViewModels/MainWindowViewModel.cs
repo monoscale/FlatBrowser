@@ -70,7 +70,7 @@ namespace FlatBrowser.ViewModels {
         private void FilterTreeView() {
             foreach (FolderTreeViewModel viewModel in FolderTreeViews) {
                 foreach (FileViewModel fileViewModel in viewModel.Files) {
-                    if (!fileViewModel.Name.Contains(SearchText)) {
+                    if (!fileViewModel.Name.ToLower().Contains(SearchText.ToLower())) {
                         fileViewModel.Visibility = Visibility.Collapsed;
                     } else {
                         fileViewModel.Visibility = Visibility.Visible;
