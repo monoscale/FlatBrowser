@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "FlatBrowserDatabase": "Data Source=flatbrowser.db"
+  }
+}

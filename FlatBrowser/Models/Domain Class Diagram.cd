@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="FlatBrowser.Models.Folder">
+    <Position X="9" Y="4.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAACAAAAAAAAAAAACAAAAAgAAAA=</HashCode>
+      <FileName>Models\Folder.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FolderCategory" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FlatBrowser.Models.FileExtension">
+    <Position X="4.75" Y="1" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\FileExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FlatBrowser.Models.File">
+    <Position X="4.75" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAIAAAAAAAAQAAAAAAAAAAAEAAAAAAAA=</HashCode>
+      <FileName>Models\File.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="FileExtension" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="FlatBrowser.Models.FileComparer">
+    <Position X="0.5" Y="2.25" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Models\FileComparer.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="FlatBrowser.Models.FileSystem">
+    <Position X="12.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\FileSystem.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FlatBrowser.Models.FolderCategory">
+    <Position X="9" Y="1" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>Models\FolderCategory.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Extensions" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Interface Name="System.Collections.Generic.IComparer&lt;T&gt;">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="10" />
+</ClassDiagram>
