@@ -42,6 +42,12 @@ namespace FlatBrowser.Models {
             FolderCategory = folderCategory;
         }
 
+
+
+        /// <summary>
+        /// Iterates all subfolders of this folder and looks for files which have relevant file extensions.
+        /// </summary>
+        /// <returns>A list of <see cref="File"/> objects which contain all the relevant files.</returns>
         public IList<File> GetFiles() {
             DirectoryInfo directory = new DirectoryInfo(Path);
             List<File> files = new List<File>();

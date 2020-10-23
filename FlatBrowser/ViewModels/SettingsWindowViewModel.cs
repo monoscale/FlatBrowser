@@ -105,6 +105,9 @@ namespace FlatBrowser.ViewModels {
             FolderCategories.Remove(folderCategory);
             if (FolderCategories.Count > 0) {
                 SelectedFolderCategory = FolderCategories[0];
+            } else {
+                Folders.Clear();
+                Extensions.Clear();
             }
         }
 
