@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:FlatBrowser.Windows"
         mc:Ignorable="d"
         ResizeMode="NoResize"
-        Title="SettingsWindow" Height="500" Width="800">
+        Title="FlatBrowser - Settings" Height="500" Width="800">
 
     <Grid Margin="10">
         <Grid.ColumnDefinitions>
