@@ -100,6 +100,7 @@ namespace FlatBrowser.ViewModels {
         }
 
         public void DeleteFolderCategory(FolderCategory folderCategory) {
+            SelectedFolderCategory = folderCategory;
             folderCategoryRepository.Remove(folderCategory);
             folderCategoryRepository.SaveChanges();
             FolderCategories.Remove(folderCategory);
