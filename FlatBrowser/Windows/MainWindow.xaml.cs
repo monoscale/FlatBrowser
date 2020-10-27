@@ -2,6 +2,7 @@
 using FlatBrowser.Models;
 using FlatBrowser.ViewModels;
 using System.Windows;
+using System.Windows.Controls;
 
 namespace FlatBrowser {
     /// <summary>

@@ -31,8 +31,8 @@
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
-                        <Button Content="Collapse All"></Button>
-                        <Button Content="Show All"></Button>
+                        <Button Style="{StaticResource ActionButton}" Padding="10,0" Content="Collapse All"/>
+                        <Button Style="{StaticResource ActionButton}" Padding="10,0" Content="Expand All"></Button>
                     </StackPanel>
                 </StackPanel>
             </GroupBox>
