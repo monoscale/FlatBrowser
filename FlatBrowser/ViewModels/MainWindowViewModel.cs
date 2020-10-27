@@ -14,7 +14,9 @@ namespace FlatBrowser.ViewModels {
         private IList<FolderTreeViewModel> folderTreeViews;
         public IList<FolderTreeViewModel> FolderTreeViews {
             get { return folderTreeViews; }
-            set { SetProperty(ref folderTreeViews, value); }
+            set {
+                SetProperty(ref folderTreeViews, value);
+            }
         }
 
         public File SelectedFile { get; set; }
@@ -39,10 +41,11 @@ namespace FlatBrowser.ViewModels {
             }
         }
 
-
         public RelayCommand OpenSettingsWindowCommand { get; private set; }
         public RelayCommand OpenFileCommand { get; private set; }
         public RelayCommand RefreshWindowCommand { get; private set; }
+        public RelayCommand CollapseAllCommand { get; private set; }
+        public RelayCommand ExpandAllCommand { get; private set; }
 
         public MainWindowViewModel(IFolderCategoryRepository repository) {
             folderCategoryRepository = repository;
@@ -52,6 +55,20 @@ namespace FlatBrowser.ViewModels {
             OpenSettingsWindowCommand = new RelayCommand(OpenSettingsWindow);
             OpenFileCommand = new RelayCommand(OpenFile, IsFileSelected);
             RefreshWindowCommand = new RelayCommand(RefreshWindow);
+            CollapseAllCommand = new RelayCommand(CollapseAll);
+            ExpandAllCommand = new RelayCommand(ExpandAll);
+
+        }
+
+        private void CollapseAll() {
+            foreach (FolderTreeViewModel vm in FolderTreeViews)
+                vm.IsExpanded = false;
+
+        }
+
+        private void ExpandAll() {
+            foreach (FolderTreeViewModel vm in FolderTreeViews)
+                vm.IsExpanded = true;
         }
 
         private void RefreshWindow() {
