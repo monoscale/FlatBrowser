@@ -37,6 +37,9 @@ namespace FlatBrowser.Models {
 
         }
 
+        /// <summary>
+        /// Gets the name of the file with the extension.
+        /// </summary>
         public string NameWithExtension {
             get {
                 return Name + FileExtension.Name;
@@ -44,6 +47,10 @@ namespace FlatBrowser.Models {
         }
 
 
+        /// <summary>
+        /// Default file constructor using the full path of the file.
+        /// </summary>
+        /// <param name="fullName">The absolute path to the file.</param>
         public File(string fullName) {
             FullName = fullName;
 

@@ -14,6 +14,9 @@ namespace FlatBrowser.Models {
         public int FolderId { get; set; }
 
         private string path;
+        /// <summary>
+        /// Gets the absolute path to the folder.
+        /// </summary>
         public string Path {
             get {
                 return path;
@@ -31,12 +34,31 @@ namespace FlatBrowser.Models {
             }
         }
 
+        /// <summary>
+        /// Gets or sets the <see cref="FolderCategory"/> object this Folder belongs to.
+        /// </summary>
         public FolderCategory FolderCategory { get; set; }
 
-        public Folder() { }
+        /// <summary>
+        /// Empty constructor for Entity Framework.
+        /// </summary>
+        private Folder() { }
 
+        /// <summary>
+        /// Constructs a <see cref="Folder"/> object with the absolute path of the folder.
+        /// </summary>
+        /// <param name="path">The absolute path to the folder. It must exist on the file system.</param>
+        /// <exception cref="ArgumentException">When path is null or empty.</exception>
+        /// <exception cref="DirectoryNotFoundException">When path leads to a nonexistent folder.</exception>
         public Folder(string path) : this(path, new FolderCategory()) { }
 
+        /// <summary>
+        /// Constructs a <see cref="Folder"/> object with the absolute path of the folder.
+        /// </summary>
+        /// <param name="path">The absolute path to the folder. It must exist on the file system.</param>
+        /// <param name="folderCategory">The <see cref="FolderCategory"/> object this folder should belong to.</param>
+        /// <exception cref="ArgumentException">When path is null or empty.</exception>
+        /// <exception cref="DirectoryNotFoundException">When path leads to a nonexistent folder.</exception>
         public Folder(string path, FolderCategory folderCategory) {
             Path = path;
             FolderCategory = folderCategory;

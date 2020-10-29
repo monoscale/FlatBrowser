@@ -9,8 +9,19 @@ namespace FlatBrowser.Models {
     public class FolderCategory {
 
         public int FolderCategoryId { get; set; }
+
+        /// <summary>
+        /// Gets or sets the name of the folder category.
+        /// </summary>
         public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or sets the list of file extensions this folder category will scan.
+        /// </summary>
         public virtual ICollection<FileExtension> Extensions { get; set; }
+        /// <summary>
+        /// Gets or sets the list of folders that belong to this folder category.
+        /// </summary>
         public virtual ICollection<Folder> Folders { get; set; }
 
 

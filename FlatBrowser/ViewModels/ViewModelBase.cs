@@ -3,6 +3,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace FlatBrowser.Windows {
+
+    /// <summary>
+    /// Base view model class which implements INotifyPropertyChanged.
+    /// </summary>
     public class ViewModelBase : INotifyPropertyChanged {
         public event PropertyChangedEventHandler PropertyChanged;
 
