@@ -15,10 +15,10 @@ namespace FlatBrowser {
         }
 
         private void TreeView_OnSelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e) {
-            if (e.NewValue.GetType() == typeof(File)) {
-                ((MainWindowViewModel)DataContext).SelectedFile = (File)e.NewValue;
+            if (e.NewValue.GetType() == typeof(FileViewModel)) {
+                ((MainWindowViewModel)DataContext).SelectedFilePath = ((FileViewModel) e.NewValue).FullName;
             } else {
-                ((MainWindowViewModel)DataContext).SelectedFile = null;
+                ((MainWindowViewModel)DataContext).SelectedFilePath = string.Empty;
             }
 
         }

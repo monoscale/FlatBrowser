@@ -12,7 +12,7 @@ namespace FlatBrowser.ViewModels {
     /// Viewmodel for the main window. Its main responsibilities are viewing folders and file collections, searching through these collections, and opening the settings menu.
     /// </summary>
     public class MainWindowViewModel : ViewModelBase {
-        
+
         /// <summary>
         /// The connection to the database. 
         /// </summary>
@@ -30,9 +30,9 @@ namespace FlatBrowser.ViewModels {
         }
 
         /// <summary>
-        /// Gets or sets the currently selected file.
+        /// Gets or sets the currently selected file path.
         /// </summary>
-        public File SelectedFile { get; set; }
+        public string SelectedFilePath { get; set; }
 
         private FolderCategory selectedFolderCategory;
         /// <summary>
@@ -144,14 +144,11 @@ namespace FlatBrowser.ViewModels {
         }
 
         private bool IsFileSelected() {
-            return SelectedFile != null;
+            return !string.IsNullOrEmpty(SelectedFilePath);
         }
 
         private void OpenFile() {
-            OpenFile(SelectedFile);
-        }
-        public void OpenFile(File file) {
-            Process.Start(file.FullName);
+            Process.Start(new ProcessStartInfo(SelectedFilePath) { UseShellExecute = true });
         }
 
     }
