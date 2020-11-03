@@ -5,13 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FlatBrowser"
         xmlns:vms="clr-namespace:FlatBrowser.ViewModels"
+        xmlns:properties="clr-namespace:FlatBrowser.Properties"
         mc:Ignorable="d"
         Title="Flatbrowser" Height="800" Width="600">
     <DockPanel>
-        <StackPanel Background="AliceBlue" DockPanel.Dock="Left" Width="100">
-            <Button Style="{StaticResource MenuButton}" Command="{Binding RefreshWindowCommand}">Refresh</Button>
-            <Button Style="{StaticResource MenuButton}" Command="{Binding OpenSettingsWindowCommand}">Settings</Button>
-        </StackPanel>
+
+        <Grid DockPanel.Dock="Left" Width="100" Background="AliceBlue">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="30"></RowDefinition>
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" DockPanel.Dock="Top" Width="100">
+                <Button Style="{StaticResource MenuButton}" Command="{Binding RefreshWindowCommand}">Refresh</Button>
+                <Button Style="{StaticResource MenuButton}" Command="{Binding OpenSettingsWindowCommand}">Settings</Button>
+            </StackPanel>
+            <Label Grid.Row="1">v0.1.0</Label>
+        </Grid>
+        
+        
 
         <Grid  DockPanel.Dock="Right">
             <Grid.RowDefinitions>
@@ -73,6 +84,7 @@
                 </TreeView.ItemTemplate>
             </TreeView>
         </Grid>
+        <Label Content="Label" Width="0"/>
     </DockPanel>
 
 </Window>
