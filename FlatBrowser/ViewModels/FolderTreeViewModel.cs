@@ -22,10 +22,13 @@ namespace FlatBrowser.ViewModels {
             set { SetProperty(ref isExpanded, value); }
         }
 
-
         public FolderTreeViewModel(Folder folder) {
             Folder = folder;
             Files = folder.GetFiles().Select(f => new FileViewModel(f)).ToList();
+        }
+
+        public bool AnyChildrenVisible() {
+            return Files.Any(File => File.Visibility == Visibility.Visible);
         }
     }
 

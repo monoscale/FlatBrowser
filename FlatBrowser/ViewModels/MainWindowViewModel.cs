@@ -127,6 +127,7 @@ namespace FlatBrowser.ViewModels {
         }
 
         private void FilterTreeView() {
+
             foreach (FolderTreeViewModel viewModel in FolderTreeViews) {
                 foreach (FileViewModel fileViewModel in viewModel.Files) {
                     if (!fileViewModel.Name.ToLower().Contains(SearchText.ToLower())) {
@@ -135,6 +136,8 @@ namespace FlatBrowser.ViewModels {
                         fileViewModel.Visibility = Visibility.Visible;
                     }
                 }
+
+                viewModel.IsExpanded = viewModel.AnyChildrenVisible();
             }
         }
 
