@@ -102,17 +102,26 @@ namespace FlatBrowser.ViewModels {
             RefreshWindow();
         }
 
+        /// <summary>
+        /// Collapses all folders
+        /// </summary>
         private void CollapseAll() {
             foreach (FolderTreeViewModel vm in FolderTreeViews)
                 vm.IsExpanded = false;
 
         }
 
+        /// <summary>
+        /// Expands all folders
+        /// </summary>
         private void ExpandAll() {
             foreach (FolderTreeViewModel vm in FolderTreeViews)
                 vm.IsExpanded = true;
         }
 
+        /// <summary>
+        /// Refreshes the window. This is boils down to a re-initialize of the window.
+        /// </summary>
         private void RefreshWindow() {
             FolderCategories = (from folderCategory in folderCategoryRepository.GetAll()
                                 select folderCategory).ToList();
@@ -122,12 +131,17 @@ namespace FlatBrowser.ViewModels {
             }
         }
 
+        /// <summary>
+        /// Updates the treeview based on the currently selected category. 
+        /// </summary>
         private void UpdateTreeView() {
             FolderTreeViews = SelectedFolderCategory.Folders.Select(folder => new FolderTreeViewModel(folder)).ToList();
         }
 
+        /// <summary>
+        /// Filters the treeview based on the search query.
+        /// </summary>
         private void FilterTreeView() {
-
             foreach (FolderTreeViewModel viewModel in FolderTreeViews) {
                 foreach (FileViewModel fileViewModel in viewModel.Files) {
                     if (!fileViewModel.Name.ToLower().Contains(SearchText.ToLower())) {
@@ -136,7 +150,6 @@ namespace FlatBrowser.ViewModels {
                         fileViewModel.Visibility = Visibility.Visible;
                     }
                 }
-
                 viewModel.IsExpanded = viewModel.AnyChildrenVisible();
             }
         }
