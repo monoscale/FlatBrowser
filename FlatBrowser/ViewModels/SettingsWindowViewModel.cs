@@ -92,11 +92,21 @@ namespace FlatBrowser.ViewModels {
             AddFolderCategory(NewFolderCategory);
         }
 
+        /// <summary>
+        /// Adds a new folder category with the given name.
+        /// </summary>
+        /// <param name="categoryName">The name of the folder category.</param>
         public void AddFolderCategory(string categoryName) {
-            FolderCategory folderCategory = new FolderCategory(categoryName);
-            folderCategoryRepository.Add(folderCategory);
-            FolderCategories.Add(folderCategory);
-            folderCategoryRepository.SaveChanges();
+            try {
+                FolderCategory folderCategory = new FolderCategory(categoryName);
+                folderCategoryRepository.Add(folderCategory);
+                FolderCategories.Add(folderCategory);
+                folderCategoryRepository.SaveChanges();
+            } catch (ArgumentException ae) {
+                Error = ae.Message;
+            }
+
+
         }
 
         public void DeleteFolderCategory(FolderCategory folderCategory) {

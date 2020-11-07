@@ -23,11 +23,11 @@ namespace FlatBrowser.Models {
             }
             private set {
                 if (string.IsNullOrWhiteSpace(value)) {
-                    throw new ArgumentException("Path may not be null or empty");
+                    throw new ArgumentException("[Setter] Folder.Path can not be null or empty.");
                 }
 
                 if (!Directory.Exists(value)) {
-                    throw new DirectoryNotFoundException($"Could not find the path '{value}'");
+                    throw new DirectoryNotFoundException($"[Setter] Folder.Path: could not find the path '{value}'.");
                 }
 
                 path = value;

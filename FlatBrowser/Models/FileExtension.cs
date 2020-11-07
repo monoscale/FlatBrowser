@@ -23,7 +23,7 @@ namespace FlatBrowser.Models {
             }
             set {
                 if (string.IsNullOrWhiteSpace(value)) {
-                    throw new ArgumentException("[Setter] FileExtension.Name can not be empty");
+                    throw new ArgumentException("[Setter] FileExtension.Name can not be null or empty.");
                 }
 
                 if (value[0] != '.') {

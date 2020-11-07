@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace FlatBrowser.Models {
@@ -10,10 +11,20 @@ namespace FlatBrowser.Models {
 
         public int FolderCategoryId { get; set; }
 
+
+        private string name;
         /// <summary>
         /// Gets or sets the name of the folder category.
         /// </summary>
-        public string Name { get; set; }
+        public string Name {
+            get { return name; }
+            set {
+                if (string.IsNullOrWhiteSpace(value)) {
+                    throw new ArgumentException("[Setter] FolderCategory.Name can not be null or empty.");
+                }
+                name = value;
+            } 
+        }
 
         /// <summary>
         /// Gets or sets the list of file extensions this folder category will scan.
