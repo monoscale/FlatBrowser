@@ -1,6 +1,7 @@
 ﻿using FlatBrowser.Database;
 using FlatBrowser.Models;
 using FlatBrowser.Windows;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -41,15 +42,31 @@ namespace FlatBrowser.ViewModels {
         public FolderCategory SelectedFolderCategory {
             get { return selectedFolderCategory; }
             set {
-                SetProperty(ref selectedFolderCategory, value);
-                UpdateTreeView();
+                if(value == null) {
+                    if(FolderCategories.Count > 0) {
+                        SetProperty(ref selectedFolderCategory, FolderCategories.ElementAt(0));
+                        UpdateTreeView();
+                    } else {
+                        SetProperty(ref selectedFolderCategory, null);
+                        // do not update tree view
+                    }
+                } else {
+                    SetProperty(ref selectedFolderCategory, value);
+                    UpdateTreeView();
+                }
+                
             }
         }
 
+
+        private ICollection<FolderCategory> folderCategories;
         /// <summary>
         /// Gets or sets the list of folder categories.
         /// </summary>
-        public ICollection<FolderCategory> FolderCategories { get; set; }
+        public ICollection<FolderCategory> FolderCategories {
+            get { return folderCategories; }
+            set { SetProperty(ref folderCategories, value); }
+        }
 
 
         private string searchText;
@@ -127,9 +144,9 @@ namespace FlatBrowser.ViewModels {
                                 select folderCategory).ToList();
             if (FolderCategories.Count > 0) {
                 SelectedFolderCategory = FolderCategories.ElementAt(0);
-                UpdateTreeView();
             }
         }
+
 
         /// <summary>
         /// Updates the treeview based on the currently selected category. 
@@ -156,7 +173,13 @@ namespace FlatBrowser.ViewModels {
 
         private void OpenSettingsWindow() {
             SettingsWindow window = new SettingsWindow(folderCategoryRepository);
+            ((SettingsWindowViewModel)window.DataContext).SettingsChanged += SettingsChanged;
             window.Show();
+            
+        }
+
+        private void SettingsChanged(object sender, EventArgs e) {
+            this.RefreshWindow();
         }
 
         private bool IsFileSelected() {

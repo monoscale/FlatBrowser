@@ -8,6 +8,8 @@ using System.Windows.Forms;
 namespace FlatBrowser.ViewModels {
     public class SettingsWindowViewModel : ViewModelBase {
 
+        public event EventHandler SettingsChanged;
+
         private IFolderCategoryRepository folderCategoryRepository;
 
 
@@ -102,6 +104,7 @@ namespace FlatBrowser.ViewModels {
                 folderCategoryRepository.Add(folderCategory);
                 FolderCategories.Add(folderCategory);
                 folderCategoryRepository.SaveChanges();
+                SettingsChanged?.Invoke(this, new EventArgs());
             } catch (ArgumentException ae) {
                 Error = ae.Message;
             }
@@ -120,6 +123,7 @@ namespace FlatBrowser.ViewModels {
                 Folders.Clear();
                 Extensions.Clear();
             }
+            SettingsChanged?.Invoke(this, new EventArgs());
         }
 
         private void ChooseFolder() {
@@ -136,6 +140,7 @@ namespace FlatBrowser.ViewModels {
             folderCategoryRepository.Edit(SelectedFolderCategory);
             folderCategoryRepository.SaveChanges();
             Folders.Add(folder);
+            SettingsChanged?.Invoke(this, new EventArgs());
         }
 
         public void DeleteFolder(Folder folder) {
@@ -143,6 +148,7 @@ namespace FlatBrowser.ViewModels {
             folderCategoryRepository.Edit(SelectedFolderCategory);
             folderCategoryRepository.SaveChanges();
             Folders.Remove(folder);
+            SettingsChanged?.Invoke(this, new EventArgs());
         }
 
 
@@ -159,6 +165,7 @@ namespace FlatBrowser.ViewModels {
                 folderCategoryRepository.Edit(SelectedFolderCategory);
                 folderCategoryRepository.SaveChanges();
                 Extensions.Add(fileExtension);
+                SettingsChanged?.Invoke(this, new EventArgs());
             } catch (ArgumentException ae) {
                 Error = ae.Message;
             }
@@ -170,7 +177,8 @@ namespace FlatBrowser.ViewModels {
             folderCategoryRepository.Edit(SelectedFolderCategory);
             folderCategoryRepository.SaveChanges();
             Extensions.Remove(parameter);
-
+            SettingsChanged?.Invoke(this, new EventArgs());
         }
+
     }
 }

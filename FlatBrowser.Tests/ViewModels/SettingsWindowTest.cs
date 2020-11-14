@@ -93,11 +93,7 @@ namespace FlatBrowserTests.ViewModels {
             Assert.IsTrue(mockRepository.IsSaved);
         }
 
-        [TestMethod]
-        public void DeleteFolderCallsSaveChanges() {
-            vm.DeleteFolder(new Folder());
-            Assert.IsTrue(mockRepository.IsSaved);
-        }
+
 
         [TestMethod]
         public void AddExtensionCallsSaveChanges() {
