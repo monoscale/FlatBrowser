@@ -27,8 +27,10 @@ namespace FlatBrowserTests.ViewModels {
 
 
         [TestMethod]
-        public void FilterShowsOnlyRelevantFiles() {
+        public void FilterShowsOnlyRelevantFilesWithTextOnly() {
+            // folder category with .bmp and .html
             vm.SelectedFolderCategory = mockRepository.GetById(1);
+            // it should find 2 files, image1.bmp and web1.html
             vm.SearchText = "1";
 
             int count = 0;
@@ -42,7 +44,6 @@ namespace FlatBrowserTests.ViewModels {
 
             Assert.AreEqual(2, count);
         }
-
 
     }
 }

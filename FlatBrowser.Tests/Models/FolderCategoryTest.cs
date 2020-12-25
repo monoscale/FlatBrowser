@@ -16,7 +16,7 @@ namespace FlatBrowserTests.Models {
 
         [TestMethod]
         public void ConstructorTakesArbitraryAmountOfExtensions() {
-            folderCategory = new FolderCategory(".jpg", ".txt");
+            folderCategory = new FolderCategory(new string[] { ".jpg", ".txt" }.ToList());
             Assert.AreEqual(2, folderCategory.Extensions.Count);
         }
 

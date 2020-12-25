@@ -23,7 +23,7 @@ namespace FlatBrowser.Models {
                     throw new ArgumentException("[Setter] FolderCategory.Name can not be null or empty.");
                 }
                 name = value;
-            } 
+            }
         }
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace FlatBrowser.Models {
         public FolderCategory(string name) : this() {
             Name = name;
         }
-        public FolderCategory(params string[] extensions) : this(new List<Folder>(), extensions.Select(ext => new FileExtension(ext)).ToList()) { }
+        public FolderCategory(ICollection<string> extensions) : this(new List<Folder>(), extensions.Select(ext => new FileExtension(ext)).ToList()) { }
         public FolderCategory(Folder folder, ICollection<FileExtension> extensions) : this(new List<Folder>() { folder }, extensions) { }
         public FolderCategory(ICollection<Folder> folders, FileExtension extension) : this(folders, new List<FileExtension>() { extension }) { }
         public FolderCategory(ICollection<Folder> folders, ICollection<FileExtension> extensions) {
