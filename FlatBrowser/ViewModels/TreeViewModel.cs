@@ -11,7 +11,7 @@ namespace FlatBrowser.ViewModels {
     /// <summary>
     /// A viewmodel which represents one folder in the treeview.
     /// </summary>
-    public class FolderTreeViewModel : ViewModelBase {
+    public class FolderViewModel : ViewModelBase {
         /// <summary>
         /// The internal folder.
         /// </summary>
@@ -35,7 +35,7 @@ namespace FlatBrowser.ViewModels {
             set { SetProperty(ref isExpanded, value); }
         }
 
-        public FolderTreeViewModel(Folder folder) {
+        public FolderViewModel(Folder folder) {
             Folder = folder;
             Files = folder.GetFiles().Select(f => new FileViewModel(f)).ToList();
         }

@@ -14,16 +14,25 @@ namespace FlatBrowser.ViewModels {
     /// </summary>
     public class MainWindowViewModel : ViewModelBase {
 
+        #region Variables
         /// <summary>
         /// The connection to the database. 
         /// </summary>
         private IFolderCategoryRepository folderCategoryRepository;
 
-        private IList<FolderTreeViewModel> folderTreeViews;
+        private IList<FolderViewModel> folderTreeViews;
+        private string searchText;
+        private FolderCategory selectedFolderCategory;
+        private ICollection<FolderCategory> folderCategories;
+
+        #endregion
+
+
+        #region Properties
         /// <summary>
-        /// Gets or sets the list of <see cref="FolderTreeViewModel"/> objects. One such view model corresponds to one folder.
+        /// Gets or sets the list of <see cref="FolderViewModel"/> objects. One such view model corresponds to one folder.
         /// </summary>
-        public IList<FolderTreeViewModel> FolderTreeViews {
+        public IList<FolderViewModel> FolderTreeViews {
             get { return folderTreeViews; }
             set {
                 SetProperty(ref folderTreeViews, value);
@@ -35,7 +44,7 @@ namespace FlatBrowser.ViewModels {
         /// </summary>
         public string SelectedFilePath { get; set; }
 
-        private FolderCategory selectedFolderCategory;
+
         /// <summary>
         /// Gets or sets the currently selected folder category.
         /// </summary>
@@ -59,7 +68,7 @@ namespace FlatBrowser.ViewModels {
         }
 
 
-        private ICollection<FolderCategory> folderCategories;
+
         /// <summary>
         /// Gets or sets the list of folder categories.
         /// </summary>
@@ -69,7 +78,7 @@ namespace FlatBrowser.ViewModels {
         }
 
 
-        private string searchText;
+
         /// <summary>
         /// Gets or sets the search text to be used when filtering through files.
         /// </summary>
@@ -102,6 +111,7 @@ namespace FlatBrowser.ViewModels {
         /// </summary>
         public RelayCommand ExpandAllCommand { get; private set; }
 
+        #endregion
 
         /// <summary>
         /// Main constructor. It takes in the folder category repository and sets all the relevant commands. At the end, it refreshes the window for the user to start using the application.
@@ -123,7 +133,7 @@ namespace FlatBrowser.ViewModels {
         /// Collapses all folders
         /// </summary>
         private void CollapseAll() {
-            foreach (FolderTreeViewModel vm in FolderTreeViews)
+            foreach (FolderViewModel vm in FolderTreeViews)
                 vm.IsExpanded = false;
 
         }
@@ -132,7 +142,7 @@ namespace FlatBrowser.ViewModels {
         /// Expands all folders
         /// </summary>
         private void ExpandAll() {
-            foreach (FolderTreeViewModel vm in FolderTreeViews)
+            foreach (FolderViewModel vm in FolderTreeViews)
                 vm.IsExpanded = true;
         }
 
@@ -151,14 +161,14 @@ namespace FlatBrowser.ViewModels {
         /// Updates the treeview based on the currently selected category. 
         /// </summary>
         private void UpdateTreeView() {
-            FolderTreeViews = SelectedFolderCategory.Folders.Select(folder => new FolderTreeViewModel(folder)).ToList();
+            FolderTreeViews = SelectedFolderCategory.Folders.Select(folder => new FolderViewModel(folder)).ToList();
         }
 
         /// <summary>
         /// Filters the treeview based on the search query.
         /// </summary>
         private void FilterTreeView() {
-            foreach (FolderTreeViewModel viewModel in FolderTreeViews) {
+            foreach (FolderViewModel viewModel in FolderTreeViews) {
                 foreach (FileViewModel fileViewModel in viewModel.Files) {
                     if (!fileViewModel.Name.ToLower().Contains(SearchText.ToLower())) {
                         fileViewModel.Visibility = Visibility.Collapsed;

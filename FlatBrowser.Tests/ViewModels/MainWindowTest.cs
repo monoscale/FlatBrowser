@@ -34,7 +34,7 @@ namespace FlatBrowserTests.ViewModels {
             vm.SearchText = "1";
 
             int count = 0;
-            foreach (FolderTreeViewModel viewModel in vm.FolderTreeViews) {
+            foreach (FolderViewModel viewModel in vm.FolderTreeViews) {
                 foreach (FileViewModel fileViewModel in viewModel.Files) {
                     if (fileViewModel.Visibility == Visibility.Visible) {
                         count++;
@@ -43,6 +43,25 @@ namespace FlatBrowserTests.ViewModels {
             }
 
             Assert.AreEqual(2, count);
+        }
+
+        [TestMethod]
+        public void FilterShowOnlyRelevantFilesWithExtensionFilters() {
+            // same test as above, but also filter on only '.html' files.
+
+            vm.SelectedFolderCategory = mockRepository.GetById(1);
+            vm.SearchText = "1";
+
+            int count = 0;
+            foreach (FolderViewModel viewModel in vm.FolderTreeViews) {
+                foreach (FileViewModel fileViewModel in viewModel.Files) {
+                    if (fileViewModel.Visibility == Visibility.Visible) {
+                        count++;
+                    }
+                }
+            }
+
+            Assert.AreEqual(1, count);
         }
 
     }
