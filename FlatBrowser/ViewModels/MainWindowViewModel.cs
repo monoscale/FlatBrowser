@@ -140,8 +140,7 @@ namespace FlatBrowser.ViewModels {
         /// Refreshes the window. This is boils down to a re-initialize of the window.
         /// </summary>
         private void RefreshWindow() {
-            FolderCategories = (from folderCategory in folderCategoryRepository.GetAll()
-                                select folderCategory).ToList();
+            FolderCategories = folderCategoryRepository.GetAll().ToList();
             if (FolderCategories.Count > 0) {
                 SelectedFolderCategory = FolderCategories.ElementAt(0);
             }
