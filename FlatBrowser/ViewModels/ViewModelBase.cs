@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace FlatBrowser.Windows {
+namespace FlatBrowser.ViewModels {
 
 
     /// <summary>
