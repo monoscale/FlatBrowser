@@ -50,6 +50,8 @@ namespace FlatBrowserTests.ViewModels {
             // same test as above, but also filter on only '.html' files.
 
             vm.SelectedFolderCategory = mockRepository.GetById(1);
+            vm.FileExtensions[0].IncludeInSearch = true;
+            vm.FileExtensions[1].IncludeInSearch = false;
             vm.SearchText = "1";
 
             int count = 0;

@@ -24,6 +24,7 @@ namespace FlatBrowser.ViewModels {
         private string searchText;
         private FolderCategory selectedFolderCategory;
         private ICollection<FolderCategory> folderCategories;
+        private IList<FileExtensionViewModel> fileExtensions;
 
         #endregion
 
@@ -39,6 +40,11 @@ namespace FlatBrowser.ViewModels {
             }
         }
 
+        public IList<FileExtensionViewModel> FileExtensions {
+            get { return fileExtensions; }
+            set { SetProperty(ref fileExtensions, value); }
+        }
+
         /// <summary>
         /// Gets or sets the currently selected file path.
         /// </summary>
@@ -51,8 +57,8 @@ namespace FlatBrowser.ViewModels {
         public FolderCategory SelectedFolderCategory {
             get { return selectedFolderCategory; }
             set {
-                if(value == null) {
-                    if(FolderCategories.Count > 0) {
+                if (value == null) {
+                    if (FolderCategories.Count > 0) {
                         SetProperty(ref selectedFolderCategory, FolderCategories.ElementAt(0));
                         UpdateTreeView();
                     } else {
@@ -63,7 +69,7 @@ namespace FlatBrowser.ViewModels {
                     SetProperty(ref selectedFolderCategory, value);
                     UpdateTreeView();
                 }
-                
+
             }
         }
 
@@ -127,6 +133,9 @@ namespace FlatBrowser.ViewModels {
             ExpandAllCommand = new RelayCommand(ExpandAll);
 
             RefreshWindow();
+            if (SelectedFolderCategory != null) {
+                FileExtensions = SelectedFolderCategory.Extensions.Select(ext => new FileExtensionViewModel(ext)).ToList();
+            }
         }
 
         /// <summary>
@@ -170,10 +179,16 @@ namespace FlatBrowser.ViewModels {
         private void FilterTreeView() {
             foreach (FolderViewModel viewModel in FolderTreeViews) {
                 foreach (FileViewModel fileViewModel in viewModel.Files) {
-                    if (!fileViewModel.Name.ToLower().Contains(SearchText.ToLower())) {
-                        fileViewModel.Visibility = Visibility.Collapsed;
-                    } else {
+                    bool fileNameContainsSearchText = fileViewModel.Name.ToLower().Contains(SearchText.ToLower());
+                    bool fileExtensionIsIncludedInSearch = fileExtensions
+                        .Where(ext => ext.IncludeInSearch)
+                        .Any(ext => fileViewModel.FileExtensionName.Equals(ext.Name));
+
+
+                    if (fileNameContainsSearchText && fileExtensionIsIncludedInSearch) {
                         fileViewModel.Visibility = Visibility.Visible;
+                    } else {
+                        fileViewModel.Visibility = Visibility.Collapsed;
                     }
                 }
                 viewModel.IsExpanded = viewModel.AnyChildrenVisible();
@@ -184,7 +199,7 @@ namespace FlatBrowser.ViewModels {
             SettingsWindow window = new SettingsWindow(folderCategoryRepository);
             ((SettingsWindowViewModel)window.DataContext).SettingsChanged += SettingsChanged;
             window.Show();
-            
+
         }
 
         private void SettingsChanged(object sender, EventArgs e) {

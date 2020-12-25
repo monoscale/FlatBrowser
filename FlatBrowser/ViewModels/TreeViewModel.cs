@@ -15,11 +15,11 @@ namespace FlatBrowser.ViewModels {
         /// <summary>
         /// The internal folder.
         /// </summary>
-        public Folder Folder { get; set; }
+        public Folder Folder { get; private set; }
         /// <summary>
         /// The files, represented as a list of file viewmodels.
         /// </summary>
-        public IList<FileViewModel> Files { get; set; }
+        public IList<FileViewModel> Files { get; private set; }
 
         /// <summary>
         /// Gets or sets the visibility of the view model.
@@ -54,11 +54,12 @@ namespace FlatBrowser.ViewModels {
         /// <summary>
         /// The full path of the file.
         /// </summary>
-        public string FullName { get; set; }
+        public string FullName { get; private set; }
+        public string FileExtensionName { get; private set; }
         /// <summary>
         /// The name of the file.
         /// </summary>
-        public string Name { get; set; }
+        public string Name { get; private set; }
 
         public bool IsExpanded {
             get { return true; } // child is always expanded
@@ -74,6 +75,7 @@ namespace FlatBrowser.ViewModels {
         
         public FileViewModel(File file) {
             Name = file.NameWithExtension;
+            FileExtensionName = file.FileExtension.Name;
             FullName = file.FullName;
             Visibility = Visibility.Visible;
         }
