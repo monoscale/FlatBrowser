@@ -52,8 +52,7 @@ namespace FlatBrowserTests.ViewModels {
         [TestMethod]
         public void DeleteFolderDeletesFromRepository() {
             int originalCount = fc.Folders.Count;
-            vm.DeleteFolder(dummyData.TestFolderForAdd);
-            fc = GetFolderCategory();
+            vm.DeleteFolder(fc.Folders.ElementAt(0));
             Assert.AreEqual(originalCount - 1, fc.Folders.Count);
         }
 
@@ -70,7 +69,6 @@ namespace FlatBrowserTests.ViewModels {
         public void DeleteFileExtensionDeletesFromRepository() {
             int originalCount = fc.Extensions.Count;
             vm.DeleteFileExtension(fc.Extensions.ElementAt(0));
-            fc = GetFolderCategory();
             Assert.AreEqual(originalCount - 1, fc.Extensions.Count);
         }
 
