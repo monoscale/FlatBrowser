@@ -10,7 +10,7 @@ namespace FlatBrowser.Windows {
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged {
 
-        public string AssemblyVersion => GetType().Assembly.GetName().Version.ToString();
+        public string AssemblyVersion => GetType().Assembly.GetName().Version.ToString(2);
 
 
         public event PropertyChangedEventHandler PropertyChanged;
