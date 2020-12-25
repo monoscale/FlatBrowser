@@ -183,8 +183,6 @@ namespace FlatBrowser.ViewModels {
                     bool fileExtensionIsIncludedInSearch = fileExtensions
                         .Where(ext => ext.IncludeInSearch)
                         .Any(ext => fileViewModel.FileExtensionName.Equals(ext.Name));
-
-
                     if (fileNameContainsSearchText && fileExtensionIsIncludedInSearch) {
                         fileViewModel.Visibility = Visibility.Visible;
                     } else {
