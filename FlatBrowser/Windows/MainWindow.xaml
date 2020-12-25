@@ -18,7 +18,7 @@
                 <Button Style="{StaticResource MenuButton}" Command="{Binding RefreshWindowCommand}">Refresh</Button>
                 <Button Style="{StaticResource MenuButton}" Command="{Binding OpenSettingsWindowCommand}">Settings</Button>
             </StackPanel>
-            <Label Grid.Row="1">v0.2.0</Label>
+            <Label Grid.Row="1" Content="{Binding AssemblyVersion}"></Label>
         </Grid>
         
         

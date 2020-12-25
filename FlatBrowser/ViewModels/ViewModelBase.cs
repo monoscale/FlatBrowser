@@ -4,10 +4,15 @@ using System.Runtime.CompilerServices;
 
 namespace FlatBrowser.Windows {
 
+
     /// <summary>
     /// Base view model class which implements INotifyPropertyChanged.
     /// </summary>
     public class ViewModelBase : INotifyPropertyChanged {
+
+        public string AssemblyVersion => GetType().Assembly.GetName().Version.ToString();
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>
