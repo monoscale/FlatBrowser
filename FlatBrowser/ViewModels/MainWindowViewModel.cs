@@ -135,7 +135,14 @@ namespace FlatBrowser.ViewModels {
             RefreshWindow();
             if (SelectedFolderCategory != null) {
                 FileExtensions = SelectedFolderCategory.Extensions.Select(ext => new FileExtensionViewModel(ext)).ToList();
+                foreach(FileExtensionViewModel vm in FileExtensions) {
+                    vm.PropertyChanged += FileExtension_CheckboxChanged;
+                }
             }
+        }
+
+        private void FileExtension_CheckboxChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e) {
+            FilterTreeView();
         }
 
         /// <summary>
@@ -203,6 +210,7 @@ namespace FlatBrowser.ViewModels {
         private void SettingsChanged(object sender, EventArgs e) {
             this.RefreshWindow();
         }
+
 
         private bool IsFileSelected() {
             return !string.IsNullOrEmpty(SelectedFilePath);
