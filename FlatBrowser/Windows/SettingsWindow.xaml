@@ -25,7 +25,11 @@
         <StackPanel Grid.Column="0" Orientation="Vertical">
             <TextBlock Style="{StaticResource SettingsHeader}" Text="Categories"/>
             <StackPanel Orientation="Horizontal">
-                <TextBox Text="{Binding NewFolderCategory}" Width="200"/>
+                <TextBox Text="{Binding NewFolderCategory, UpdateSourceTrigger=PropertyChanged}" Width="200">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding AddFolderCategoryCommand}" Key="Return"/>
+                    </TextBox.InputBindings>
+                </TextBox>
                 <Button Content="Add" Command="{Binding AddFolderCategoryCommand}"/>
             </StackPanel>
         </StackPanel>
@@ -66,7 +70,11 @@
         <StackPanel Grid.Column="4" Orientation="Vertical">
             <TextBlock Style="{StaticResource SettingsHeader}" Text="Extensions"/>
             <StackPanel Orientation="Horizontal">
-                <TextBox Text="{Binding NewFileExtension}" Width="60"/>
+                <TextBox Text="{Binding NewFileExtension, UpdateSourceTrigger=PropertyChanged}" Width="60">
+                    <TextBox.InputBindings>
+                        <KeyBinding Command="{Binding AddFileExtensionCommand}" Key="Return"/>
+                    </TextBox.InputBindings>
+                </TextBox>
                 <Button Content="Add" Command="{Binding AddFileExtensionCommand}"/>
             </StackPanel>
         </StackPanel>
