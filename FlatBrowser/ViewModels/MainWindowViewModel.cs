@@ -133,12 +133,6 @@ namespace FlatBrowser.ViewModels {
             ExpandAllCommand = new RelayCommand(ExpandAll);
 
             RefreshWindow();
-            if (SelectedFolderCategory != null) {
-                FileExtensions = SelectedFolderCategory.Extensions.Select(ext => new FileExtensionViewModel(ext)).ToList();
-                foreach(FileExtensionViewModel vm in FileExtensions) {
-                    vm.PropertyChanged += FileExtension_CheckboxChanged;
-                }
-            }
         }
 
         private void FileExtension_CheckboxChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e) {
@@ -169,6 +163,10 @@ namespace FlatBrowser.ViewModels {
             FolderCategories = folderCategoryRepository.GetAll().ToList();
             if (FolderCategories.Count > 0) {
                 SelectedFolderCategory = FolderCategories.ElementAt(0);
+                FileExtensions = SelectedFolderCategory.Extensions.Select(ext => new FileExtensionViewModel(ext)).ToList();
+                foreach (FileExtensionViewModel vm in FileExtensions) {
+                    vm.PropertyChanged += FileExtension_CheckboxChanged;
+                }
             }
         }
 
@@ -208,7 +206,7 @@ namespace FlatBrowser.ViewModels {
         }
 
         private void SettingsChanged(object sender, EventArgs e) {
-            this.RefreshWindow();
+            RefreshWindow();
         }
 
 
